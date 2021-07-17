@@ -7,7 +7,7 @@ export default function Home() {
 
   return (
     <div>
-      <h1>Welcome to {user.displayName} dailyPoisson</h1>
+      <h1>Welcome {user.displayName || "New user"} to dailyPoisson</h1>
       <LogoutButton />
     </div>
   );
