@@ -33,98 +33,101 @@ export function LoginRegister() {
   };
 
   return (
-    <div className="auth-container">
-      <div className="auth__card">
-        {loginSection ? (
-          <>
-            {/* left-section */}
-            <div className="auth__card__left">
-              <div className="auth__card__left__head">
-                <Image
-                  src="https://via.placeholder.com/50"
-                  width="50"
-                  height="50"
-                  alt=""
-                />
-                <h2>Logo Daly poisson</h2>
-              </div>
-              <div>
-                <h3>Challenge the best of yourself everyday</h3>
-                <span>dont hide your hidieen</span>
-              </div>
-              <div>
-                <span>dont have an account </span>
-                <button onClick={() => setLoginSection(false)}>
-                  register Now
-                </button>
-              </div>
-            </div>
-            {/* end-left-section */}
-            {/* right-section */}
-            <div className="auth__card__right">
-              <div className="auth__card__right__login">
-                <div>
-                  <h1>Welcome</h1>
-                  <input
-                    type="text"
-                    name="email"
-                    value={signIn.email}
-                    onChange={signInHandleChange}
-                    placeholder="email"
+    <div className="auth-background">
+      <div className="auth-container">
+        <div className="auth__card">
+          {loginSection ? (
+            <>
+              {/* left-section */}
+              <div className="auth__card__left">
+                <div className="auth__card__left__head">
+                  <Image
+                    src="https://via.placeholder.com/50"
+                    width="50"
+                    height="50"
+                    alt=""
                   />
-                  <input
-                    type="password"
-                    name="password"
-                    value={signIn.password}
-                    onChange={signInHandleChange}
-                    placeholder="password"
-                  />
-                  <button onClick={emailLogin}>Login</button>
+                  <span>Daily poisson</span>
                 </div>
-                <div>
-                  <h5>login with social media</h5>
-                  <div>
-                    <GoogleLoginButton />
+                <div className="auth__card__left__content">
+                  <h1>CHALLENGE THE BEST </h1>
+                  <h1>OF YOURSELF EVERYDAY</h1>
+                  <span>Bring out your hidden gems</span>
+                </div>
+                <div className="auth__card__left__footer">
+                  <span>dont have an account </span>
+                  <button onClick={() => setLoginSection(false)}>
+                    register Now
+                  </button>
+                </div>
+              </div>
+              {/* end-left-section */}
+              {/* right-section */}
+              <div className="auth__card__right">
+                <div className="auth__card__right__login">
+                  <div className="auth__card__right__head">
+                    <h1>WELCOME</h1>
+                    <input
+                      type="text"
+                      name="email"
+                      value={signIn.email}
+                      onChange={signInHandleChange}
+                      placeholder="email"
+                    />
+                    <input
+                      type="password"
+                      name="password"
+                      value={signIn.password}
+                      onChange={signInHandleChange}
+                      placeholder="password"
+                    />
+                    <button onClick={emailLogin}>Login</button>
+                  </div>
+                  <div className="auth__card__right__footer">
+                    <h5>login with social media</h5>
+                    <div>
+                      <GoogleLoginButton />
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            {/* end-right-section */}
-          </>
-        ) : (
-          <>
-            <button onClick={() => setLoginSection(true)}>
-              Alreday have an account
-            </button>
-            {/* right-section */}
-            <div>
-              <h1>Create Accout</h1>
-              <input
-                type="text"
-                name="username"
-                value={values.username}
-                onChange={handleChange}
-                placeholder="username"
-              />
-              <input
-                type="password"
-                name="password"
-                value={values.password}
-                onChange={handleChange}
-                placeholder="password"
-              />
-              <input
-                type="email"
-                name="email"
-                value={values.email}
-                onChange={handleChange}
-                placeholder="email"
-              />
-              <button onClick={emailSignUp}>sign up</button>
-            </div>
-            {/* end-right-section */}
-          </>
-        )}
+              {/* end-right-section */}
+            </>
+          ) : (
+            <>
+              <button onClick={() => setLoginSection(true)}>
+                Alreday have an account
+              </button>
+              {/* right-section */}
+              <div>
+                <h1>Create Accout</h1>
+                <input
+                  type="text"
+                  name="username"
+                  value={values.username}
+                  onChange={handleChange}
+                  placeholder="username"
+                />
+                <input
+                  type="password"
+                  name="password"
+                  value={values.password}
+                  onChange={handleChange}
+                  placeholder="password"
+                />
+                <input
+                  type="email"
+                  name="email"
+                  value={values.email}
+                  onChange={handleChange}
+                  placeholder="email"
+                />
+                <button onClick={emailSignUp}>sign up</button>
+              </div>
+              {/* end-right-section */}
+            </>
+          )}
+        </div>
       </div>
     </div>
   );
