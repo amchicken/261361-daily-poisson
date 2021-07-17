@@ -1,42 +1,127 @@
+.auth-background{
+  background: linear-gradient(180deg, #201344 54.69%, rgba(54, 40, 95, 0.9) 83.85%
+  , #6D36E3 99.91%, rgba(54, 40, 95, 0.856857) 99.92%, rgba(54, 40, 95, 0.68) 99.93%, rgba(54, 40, 95, 0.809843) 99.94%);
+  height: 100vh;
+  width: 100vw;
+  box-shadow: inset 0px 4px 100px rgba(0, 0, 0, 0.46);
+
+}
+
 .auth-container {
-  background: url("../public/img/backgroundLogin.png");
-  background-attachment: fixed;
-  background-position: center;
+  background-image: url("../images/background.jpg"), linear-gradient(179.66deg, #FFFFFF 0.29%, #B5F8CC 38.58%, #90C4F4 100.99%);
+  background-size: cover;
+  background-position: -40px 90%;
   height: 100vh;
   width: 100vw;
   padding: 8% 4%;
+  mix-blend-mode: lighten;
+  box-shadow: 30px 40px 50px rgba(0, 0, 0, 0.25);
 }
 
 .auth__card {
+  position:relative;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  width:70%;
   height: 100%;
   border-radius: 20px;
-  background: linear-gradient(#201344, #36285f),
-    url("../public/img/backgroundCilp.jpg"),
-    url("../public/img/backgroundLogin.png");
-  background-attachment: fixed;
-  background-position: center;
-  background-blend-mode: screen;
+  background:transparent;
   display: flex;
   justify-content: space-around;
-  padding: 3rem;
+  padding: 2rem;
   color: white;
   &__left {
-    flex: 6;
+    flex: 5;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     &__head {
       display: flex;
-      align-items: center;
-      h2 {
-        margin-left: 1rem;
+      flex:4;
+      align-items: flex-start;
+      span{
+        position: relative;
+        top:10px; left:20px;
+        font-family: Syncopate;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 1.6rem;
       }
       img {
         border-radius: 50%;
       }
     }
+    &__content{
+      display: flex;
+      flex:5;
+      flex-direction:column;
+      align-items: center;
+      h1{
+        font-family: Rubik One;
+        font-weight: 900;
+        font-size: 2rem;
+      }
+      span{
+        margin-top: 10px;
+        font-family: Rubik One;
+        font-weight: 900;
+        font-size: 1.1rem;
+      }
+    }
+    &__footer{
+      display: flex;
+      flex: 3;
+      flex-direction:column;
+      align-items: center;
+    }
   }
   &__right {
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.24), 1px 1px 1px rgba(233, 143, 255, 0.5);
+    backdrop-filter: blur(50px);
+    border-radius: 20%;
     flex: 4;
+    display: flex;
+    flex-direction: column;
+    &__head{
+      display: flex;
+      flex:6;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-evenly;
+      margin-top: 30px;
+      h1{
+        font-family: Rubik One;
+        font-size: 2rem;
+        font-weight: 900;
+        margin-bottom:20px;
+      }
+      input{
+
+      }
+    }
+    &__footer{
+      display: flex;
+      flex:3;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-evenly;
+    }
   }
+}
+.auth__card::after{
+  z-index:-1;
+  content: "";
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  opacity: 0.65;
+  border-radius:20px;
+  background-image: url("../images/card-background.jpg");
+  mix-blend-mode: darken;
+  background-size: 1000px 1000px;
+  background-repeat: no-repeat;
 }
