@@ -1,5 +1,7 @@
 .auth-container {
-  background-color: tomato;
+  background: url("../public/img/backgroundLogin.png");
+  background-attachment: fixed;
+  background-position: center;
   height: 100vh;
   width: 100vw;
   padding: 8% 4%;
@@ -8,7 +10,12 @@
 .auth__card {
   height: 100%;
   border-radius: 20px;
-  background: teal;
+  background: linear-gradient(#201344, #36285f),
+    url("../public/img/backgroundCilp.jpg"),
+    url("../public/img/backgroundLogin.png");
+  background-attachment: fixed;
+  background-position: center;
+  background-blend-mode: screen;
   display: flex;
   justify-content: space-around;
   padding: 3rem;
