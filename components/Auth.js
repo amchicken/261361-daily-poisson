@@ -57,7 +57,7 @@ export function LoginRegister() {
                   <span>Bring out your hidden gems</span>
                 </div>
                 <div className="auth__card__left__footer">
-                  <span>DON'T HAVE AN ACCOUNT</span>
+                  <span>DON&apos;T HAVE AN ACCOUNT</span>
                   <button onClick={() => setLoginSection(false)}>
                     Register Now
                   </button>
@@ -105,7 +105,7 @@ export function LoginRegister() {
           ) : (
             <>
               <button onClick={() => setLoginSection(true)}>
-                Alreday have an account
+                Already have an account
               </button>
               {/* right-section */}
               <div>
