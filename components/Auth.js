@@ -1,15 +1,17 @@
 import { auth, googleProvider } from "@lib/firebase";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { FcGoogle } from 'react-icons/fc';
 import { SocialIcon} from 'react-social-icons';
 import { useForm } from "@lib/useForm";
 
 export function LoginRegister() {
   const [loginSection, setLoginSection] = useState(true);
+  
   const [values, handleChange] = useForm({
     email: "",
     password: "",
+    confirmPassword: "",
     username: "",
   });
 
@@ -19,6 +21,12 @@ export function LoginRegister() {
   });
 
   const emailSignUp = async () => {
+    if(values.password !== values.confirmPassword){
+
+      ////// ALERT SOMETHING
+
+      return;
+    }
     await auth
       .createUserWithEmailAndPassword(values.email, values.password)
       .then(() => {
@@ -34,12 +42,34 @@ export function LoginRegister() {
     await auth.signInWithEmailAndPassword(signIn.email, signIn.password);
   };
 
+  const loginCard = useRef();
+  const registerCard = useRef();
+
+  const sleep = (milliseconds) => {
+    return new Promise(resolve => setTimeout(resolve, milliseconds))
+  }
+
+  useEffect( async () => {
+    if(loginCard.current != null){
+      loginCard.current.style.opacity = 0;
+      await sleep(1000)
+      loginCard.current.style.opacity = 1;
+    }
+    if(registerCard.current != null){
+      registerCard.current.style.opacity = 0;
+      await sleep(1000)
+      registerCard.current.style.opacity = 1;
+    }
+
+    console.log(registerCard,loginCard)
+      
+  },[loginSection]);
+
   return (
     <div className="auth-background">
       <div className="auth-container">
-        <div className="auth__card">
-          {loginSection ? (
-            <>
+        {loginSection ? (
+          <div className="auth__card" ref={loginCard}>
               {/* left-section */}
               <div className="auth__card__left">
                 <div className="auth__card__left__head">
@@ -101,46 +131,80 @@ export function LoginRegister() {
                 </div>
               </div>
               {/* end-right-section */}
-            </>
+          </div>
           ) : (
-            <>
-              <button onClick={() => setLoginSection(true)}>
-                Already have an account
-              </button>
-              {/* right-section */}
-              <div>
-                <h1>Create Accout</h1>
-                <input
-                  type="text"
-                  name="username"
-                  value={values.username}
-                  onChange={handleChange}
-                  placeholder="username"
-                />
-                <input
-                  type="password"
-                  name="password"
-                  value={values.password}
-                  onChange={handleChange}
-                  placeholder="password"
-                />
-                <input
+          <div className="auth__card" ref={registerCard}>
+            <div className="auth__card__left">
+              <div className="auth__card__left__head">
+                <Image
+                  src="https://via.placeholder.com/50"
+                  width="50"
+                  height="50"
+                  alt=""
+                  />
+                <span>Daily poisson</span>
+              </div>
+              <div className="auth__card__left__content">
+                <button onClick={() => setLoginSection(true)}>
+                  Already have an account
+                </button>
+                <div></div>
+              </div>
+            </div>
+            {/* right-section */}
+            <div className="auth__card__right">
+              <div className="auth__card__right__head">
+                <h1 style={{fontSize:"24px"}}>CREATE ACCOUNT</h1>
+              
+                <div>
+                  <input
+                    type="text"
+                    name="username"
+                    value={values.username}
+                    onChange={handleChange}
+                    />
+                    <label htmlFor="username">username</label>
+                </div>
+                <div>
+                  <input
+                    type="password"
+                    name="password"
+                    value={values.password}
+                    onChange={handleChange}
+                    />
+                    <label htmlFor="password">password</label>
+                </div>
+                <div>
+                  <input
+                    type="password"
+                    name="confirmPassword"
+                    value={values.confirmPassword}
+                    onChange={handleChange}
+                    />
+                    <label htmlFor="confirmPassword">confirm password</label>
+                </div>
+                <div>
+                  <input
                   type="email"
                   name="email"
                   value={values.email}
                   onChange={handleChange}
-                  placeholder="email"
-                />
+                  />
+                  <label htmlFor="email">email</label>
+                </div> 
                 <button onClick={emailSignUp}>sign up</button>
               </div>
-              {/* end-right-section */}
-            </>
-          )}
-        </div>
+            </div>
+            {/* end-right-section */}
+          </div>
+        )}
       </div>
     </div>
-  );
+    );
+
 }
+
+
 
 function RegisterForm() {}
 
