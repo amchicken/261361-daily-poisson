@@ -1,6 +1,8 @@
 import { auth, googleProvider } from "@lib/firebase";
 import Image from "next/image";
 import { useState } from "react";
+import { FcGoogle } from 'react-icons/fc';
+import { SocialIcon} from 'react-social-icons';
 import { useForm } from "@lib/useForm";
 
 export function LoginRegister() {
@@ -55,9 +57,9 @@ export function LoginRegister() {
                   <span>Bring out your hidden gems</span>
                 </div>
                 <div className="auth__card__left__footer">
-                  <span>dont have an account </span>
+                  <span>DON'T HAVE AN ACCOUNT</span>
                   <button onClick={() => setLoginSection(false)}>
-                    register Now
+                    Register Now
                   </button>
                 </div>
               </div>
@@ -67,25 +69,32 @@ export function LoginRegister() {
                 <div className="auth__card__right__login">
                   <div className="auth__card__right__head">
                     <h1>WELCOME</h1>
-                    <input
-                      type="text"
-                      name="email"
-                      value={signIn.email}
-                      onChange={signInHandleChange}
-                      placeholder="email"
-                    />
-                    <input
-                      type="password"
-                      name="password"
-                      value={signIn.password}
-                      onChange={signInHandleChange}
-                      placeholder="password"
-                    />
-                    <button onClick={emailLogin}>Login</button>
+                    <div>
+                      <input
+                        type="text"
+                        name="email"
+                        value={signIn.email}
+                        onChange={signInHandleChange}
+                      />
+                      <label for="email">email</label>
+                    </div>
+                    <div>
+                      <input
+                        type="password"
+                        name="password"
+                        value={signIn.password}
+                        onChange={signInHandleChange}
+                      />
+                      <label for="password">password</label>
+                    </div>
+                    <button onClick={emailLogin}>login</button>
+                    <span>forgot password</span>
                   </div>
                   <div className="auth__card__right__footer">
                     <h5>login with social media</h5>
                     <div>
+                      <button><SocialIcon network="facebook" bgColor="#33ccff" fgColor="white" style={{height:30,width:30}}/></button>
+                      <button><SocialIcon network="twitter" style={{height:30,width:30}}/></button>
                       <GoogleLoginButton />
                     </div>
                   </div>
@@ -136,10 +145,11 @@ export function LoginRegister() {
 function RegisterForm() {}
 
 function GoogleLoginButton() {
+  
   const googleLoginHandle = async () => {
     await auth.signInWithRedirect(googleProvider);
   };
-  return <button onClick={googleLoginHandle}>Google</button>;
+  return <button onClick={googleLoginHandle}><FcGoogle style={{position: 'relative', top:'5px', right:'2px'}} /></button>;
 }
 
 export function LogoutButton() {
