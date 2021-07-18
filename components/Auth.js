@@ -76,7 +76,7 @@ export function LoginRegister() {
                         value={signIn.email}
                         onChange={signInHandleChange}
                       />
-                      <label for="email">email</label>
+                      <label htmlFor="email">email</label>
                     </div>
                     <div>
                       <input
@@ -85,7 +85,7 @@ export function LoginRegister() {
                         value={signIn.password}
                         onChange={signInHandleChange}
                       />
-                      <label for="password">password</label>
+                      <label htmlFor="password">password</label>
                     </div>
                     <button onClick={emailLogin}>login</button>
                     <span>forgot password</span>
