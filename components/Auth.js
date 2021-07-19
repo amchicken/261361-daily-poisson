@@ -51,18 +51,11 @@ export function LoginRegister() {
 
   useEffect( async () => {
     if(loginCard.current != null){
-      loginCard.current.style.opacity = 0;
-      await sleep(1000)
       loginCard.current.style.opacity = 1;
     }
     if(registerCard.current != null){
-      registerCard.current.style.opacity = 0;
-      await sleep(1000)
       registerCard.current.style.opacity = 1;
     }
-
-    console.log(registerCard,loginCard)
-      
   },[loginSection]);
 
   return (
@@ -88,7 +81,11 @@ export function LoginRegister() {
                 </div>
                 <div className="auth__card__left__footer">
                   <span>DON&apos;T HAVE AN ACCOUNT</span>
-                  <button onClick={() => setLoginSection(false)}>
+                  <button onClick={async () => {
+                    loginCard.current.style.opacity = 0;
+                    await sleep(1000)
+                    setLoginSection(false)
+                    }}>
                     Register Now
                   </button>
                 </div>
@@ -145,7 +142,11 @@ export function LoginRegister() {
                 <span>Daily poisson</span>
               </div>
               <div className="auth__card__left__content">
-                <button onClick={() => setLoginSection(true)}>
+                <button onClick={async () => {
+                  registerCard.current.style.opacity = 0;
+                  await sleep(1000)
+                  setLoginSection(true)
+                }}>
                   Already have an account
                 </button>
                 <div></div>
