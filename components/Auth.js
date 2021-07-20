@@ -120,8 +120,8 @@ export function LoginRegister() {
                   <div className="auth__card__right__footer">
                     <h5>login with social media</h5>
                     <div>
-                      <button><SocialIcon network="facebook" bgColor="#33ccff" fgColor="white" style={{height:30,width:30}}/></button>
-                      <button><SocialIcon network="twitter" style={{height:30,width:30}}/></button>
+                      <button><SocialIcon network="facebook" bgColor="#33ccff" fgColor="white" style={{height:20,width:20}}/></button>
+                      <button><SocialIcon network="twitter" style={{height:20,width:20}}/></button>
                       <GoogleLoginButton />
                     </div>
                   </div>

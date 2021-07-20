@@ -46,22 +46,24 @@ $font-stix: 'STIX Two Math', serif;
   border-radius: 20px;
   background:transparent;
   display: flex;
-  justify-content: space-around;
   padding: 2rem;
   color: white;
   transition: opacity 1s linear;
+
   &__left {
     flex: 5;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    
     &__head {
       display: flex;
       flex:4;
       align-items: flex-start;
       span{
         position: relative;
-        top:10px; left:20px;
+        top:0.625rem; left:20px;
         font-family: Syncopate;
         font-style: normal;
         font-weight: normal;
@@ -82,7 +84,7 @@ $font-stix: 'STIX Two Math', serif;
         font-size: 2rem;
       }
       span{
-        margin-top: 10px;
+        margin-top: 0.625rem;
         font-family: Rubik One;
         font-weight: 900;
         font-size: 1.1rem;
@@ -107,7 +109,7 @@ $font-stix: 'STIX Two Math', serif;
         }
       }
       div{
-        margin-top: 20px;
+        margin-top: 1.25rem;
         width:40%;
         height:5px;
         border-bottom: 2px solid white;
@@ -131,7 +133,7 @@ $font-stix: 'STIX Two Math', serif;
         font-weight: 900;
         border:none;
         background: rgba(0, 0, 0, 0.3);
-        padding:5px;
+        padding:0.312rem;
         border-radius:20px;
         backdrop-filter: blur(100px);
         &:hover{
@@ -141,15 +143,18 @@ $font-stix: 'STIX Two Math', serif;
       }
       div{
         min-width:30%;
-        height:10px;
+        height:0.625rem;
         border-bottom: 2px solid white;
       }
     }
+
+    
+
   }
   &__right {
     background: rgba(0, 0, 0, 0.7);
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3), 1px 1px 1px rgba(233, 143, 255, 0.5);
-    backdrop-filter: blur(50px);
+    backdrop-filter: blur(3.125rem);
     border-radius: 20%;
     flex: 4;
     display: flex;
@@ -160,7 +165,7 @@ $font-stix: 'STIX Two Math', serif;
       flex-direction: column;
       align-items: center;
       justify-content: space-evenly;
-      margin-top: 30px;
+      margin-top: 1.875rem;
       h1{
         font-family: $font-ultra;
         font-size: 2rem;
@@ -169,14 +174,14 @@ $font-stix: 'STIX Two Math', serif;
       div{
         position: relative;
         width:70%;
-        height:50px;
+        height:3.12rem;
         font-family: $font-jose;
         color:white;
         font-size:1.2rem;
-        margin-top:20px; 
+        margin-top:1.25rem; 
         input{
           border:none;
-          padding-top: 20px;
+          padding-top: 1.25rem;
           background:transparent;
           outline:none;
           width:100%;
@@ -199,7 +204,7 @@ $font-stix: 'STIX Two Math', serif;
         }
       }
       button{
-        margin-top: 20px;
+        margin-top: 1.25rem;
         font-family: $font-jose;
         font-size:1.6rem;
         padding:0.3rem 3rem;
@@ -208,7 +213,7 @@ $font-stix: 'STIX Two Math', serif;
         background: black;
         border: 1px solid #FB25FF;
         backdrop-filter: blur(100px);
-        margin-bottom: 5px;
+        margin-bottom: 0.312rem;
         outline:none;
         transition: 1s ease;
         &:hover{
@@ -219,7 +224,7 @@ $font-stix: 'STIX Two Math', serif;
       span{
         margin:0;
         font-family: $font-stix;
-        font-size:0.8rem;
+        font-size:0.87rem;
         color: rgba(white,0.4);
         width:50%;
         height:auto;
@@ -231,7 +236,7 @@ $font-stix: 'STIX Two Math', serif;
           color:white;
         }
       }
-      margin-bottom: 50px;
+      margin-bottom: 3.12rem;
     }
     &__footer{
       display: flex;
@@ -241,19 +246,19 @@ $font-stix: 'STIX Two Math', serif;
       justify-content: space-evenly;
       h5{
         font-family: $font-jose;
-        margin-bottom: 15px;
+        margin-bottom: 0.9rem;
       }
       div{
         display:grid;
         grid-template-columns: 1fr 1fr 1fr;
-        grid-column-gap: 25px;
+        grid-column-gap: 1.51rem;
         justify-content: space-around;
         align-items:center;
         button{
-          width:30px;
-          height:30px;
+          width:1.87rem;
+          height:1.87rem;
           background:transparent;
-          font-size: 32px;
+          font-size: 2rem;
           border-radius:50%;
           border:none;
           &:hover{
@@ -262,6 +267,8 @@ $font-stix: 'STIX Two Math', serif;
         }
       }
     }
+
+    
   }
   &::after{
     z-index:-1;
@@ -278,4 +285,158 @@ $font-stix: 'STIX Two Math', serif;
     background-size: 1000px 1000px;
     background-repeat: no-repeat;
   }
+
+}
+
+
+/////////////////////////////////////// 1250 pixel WIDTH //////////////////////////
+
+@media all and (max-width:1250px){
+  html{
+    font-size: 14px ;
+  }
+
+  .auth__card{
+    width:80%;
+    &__left{
+      flex:3;
+      
+      &__content{
+        h1{
+          font-size:1.8rem;
+        }
+        span{
+          font-size:1rem;
+        }
+      }
+    }
+    &__right{
+      flex:2;
+      &__head{
+        flex:3;
+        h1{
+          font-size:1.4rem;
+        }
+        label{
+          font-size:1rem;
+        }
+        margin-bottom: 2rem;
+      }
+      &__footer{
+        flex:1;
+        h5{
+          display:none;
+        }
+        button{
+          position: relative;
+          bottom:2rem;
+        }
+      }
+    }
+  }
+
+}
+
+@media all and (max-width:900px){
+  html{
+    font-size: 10px ;
+  }
+
+  .auth__card{
+    width:80%;
+    &__left{
+      flex:3;
+      &__head{
+      }
+      &__content{
+        h1{
+          font-size:1.4rem;
+        }
+        span{
+          font-size:1rem;
+        }
+      }
+    }
+    &__right{
+      flex:2;
+      &__head{
+        flex:3;
+        h1{
+          font-size:1.4rem;
+        }
+        label{
+          font-size:1rem;
+        }
+        margin-bottom: 2rem;
+      }
+      &__footer{
+        flex:1;
+        h5{
+          display:none;
+        }
+        button{
+          position: relative;
+          bottom:2rem;
+        }
+      }
+    }
+  }
+
+}
+
+@media all and (max-width:700px){
+  html{
+    font-size: 10px ;
+  }
+
+  .auth__card{
+    width:80%;
+    &__left{
+      flex:3;
+      &__head{
+        span{
+          position:relative;
+          top:1.5rem;
+        }
+      }
+      &__content{
+        h1{
+          font-size:1.2rem;
+        }
+        span{
+          font-size:0.8rem;
+        }
+      }
+    }
+    &__right{
+      flex:2;
+      &__head{
+        flex:3;
+        h1{
+          font-size:1.4rem;
+        }
+        label{
+          font-size:1rem;
+        }
+        margin-bottom: 2rem;
+      }
+      &__footer{
+        flex:1;
+        h5{
+          display:none;
+        }
+        button{
+          position: relative;
+          bottom:2rem;
+        }
+      }
+    }
+  }
+
+}
+
+@media all and (max-width:400px) and (max-height: 700px){
+  
+  //// TO be implement
+
 }
