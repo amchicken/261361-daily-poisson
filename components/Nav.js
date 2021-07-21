@@ -24,7 +24,20 @@ export default function Nav() {
       </div>
       <div className={usermenu ? "nav__float show" : "nav__float hidden"}>
         <button onClick={() => setUserMenu(false)}>X</button>
-        <h2>{user.displayName}</h2>
+        <div>
+          <Image
+            src={user.photoURL}
+            width={50}
+            height={50}
+            alt="profile-image"
+          />
+          <h2>{user.displayName}</h2>
+        </div>
+        <ul>
+          <li>Profile</li>
+          <li>Daliy challenges</li>
+          <li>Leaderboard</li>
+        </ul>
         <LogoutButton />
       </div>
 

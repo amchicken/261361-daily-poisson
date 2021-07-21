@@ -2,9 +2,10 @@
   display: flex;
   position: relative;
   height: $nav-height;
-  background: blueviolet;
   align-items: center;
   padding: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
+    rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
   &__left-side {
     justify-self: flex-start;
     display: flex;
@@ -24,6 +25,8 @@
     z-index: 90;
     transition: cubic-bezier(0.075, 0.82, 0.165, 1) all 0.5s;
     left: 0;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+      rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
   }
   .hidden {
     transform: translateX(-320px);
