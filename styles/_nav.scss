@@ -1,0 +1,27 @@
+.nav {
+  display: flex;
+  position: relative;
+  height: $nav-height;
+  background: blueviolet;
+  align-items: center;
+  padding: 1rem;
+  &__left-side {
+    justify-self: flex-start;
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+  &__middle {
+    position: absolute;
+    left: 50%;
+  }
+  &__float {
+    position: absolute;
+    background-color: tomato;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 320px;
+    z-index: 90;
+  }
+}
