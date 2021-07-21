@@ -7,6 +7,12 @@ import { useForm } from "@lib/useForm";
 
 export function LoginRegister() {
   const [loginSection, setLoginSection] = useState(true);
+  const [iconHeight,setIconHeight] = useState(30);
+  const [iconWidth,setIconWidth] = useState(30);
+  const [dimensions, setDimensions] = useState({ 
+    height: window.innerHeight,
+    width: window.innerWidth
+  });
   
   const [values, handleChange] = useForm({
     email: "",
@@ -57,6 +63,20 @@ export function LoginRegister() {
       registerCard.current.style.opacity = 1;
     }
   },[loginSection]);
+
+  useEffect(() => {
+    function handleResize() {
+      
+      if(window.innerWidth <= 950 || window.innerHeight <= 550){
+        setIconWidth(20);
+        setIconHeight(20);
+      }else{
+        setIconWidth(30);
+        setIconHeight(30);
+      }
+    }
+    window.addEventListener('resize', handleResize)
+  });
 
   return (
     <div className="auth-background">
@@ -120,8 +140,9 @@ export function LoginRegister() {
                   <div className="auth__card__right__footer">
                     <h5>login with social media</h5>
                     <div>
-                      <button><SocialIcon network="facebook" bgColor="#33ccff" fgColor="white" style={{height:20,width:20}}/></button>
-                      <button><SocialIcon network="twitter" style={{height:20,width:20}}/></button>
+                      {console.log(iconHeight)}
+                      <button><SocialIcon network="facebook" bgColor="#33ccff" fgColor="white" style={{height:iconHeight,width:iconWidth}}/></button>
+                      <button><SocialIcon network="twitter" style={{height:iconHeight,width:iconWidth}}/></button>
                       <GoogleLoginButton />
                     </div>
                   </div>
@@ -155,7 +176,7 @@ export function LoginRegister() {
             {/* right-section */}
             <div className="auth__card__right">
               <div className="auth__card__right__head">
-                <h1 style={{fontSize:"24px"}}>CREATE ACCOUNT</h1>
+                <h2>CREATE ACCOUNT</h2>
               
                 <div>
                   <input
