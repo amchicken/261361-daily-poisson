@@ -7,7 +7,6 @@ import { LogoutButton } from "@components/Auth";
 export default function Nav() {
   const [usermenu, setUserMenu] = useState(false);
   const user = useContext(UserContext);
-  console.log(user);
 
   return (
     <nav className="nav">
@@ -23,13 +22,12 @@ export default function Nav() {
         <Link href="/explore">Explore</Link>
         <Link href="/discuss">Discuss</Link>
       </div>
-      {usermenu ? (
-        <div className="nav__float">
-          <button onClick={() => setUserMenu(false)}>X</button>
-          <h2>{JSON.stringify(user.displayName)}</h2>
-          <LogoutButton />
-        </div>
-      ) : null}
+      <div className={usermenu ? "nav__float show" : "nav__float hidden"}>
+        <button onClick={() => setUserMenu(false)}>X</button>
+        <h2>{user.displayName}</h2>
+        <LogoutButton />
+      </div>
+
       <div className="nav__middle">Logo</div>
     </nav>
   );
