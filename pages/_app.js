@@ -4,6 +4,7 @@ import { useUser } from "@lib/useUser";
 import { UserContext } from "@lib/UserContext";
 import { Toaster } from "react-hot-toast";
 
+
 function MyApp({ Component, pageProps }) {
   const { user, loading } = useUser();
 
