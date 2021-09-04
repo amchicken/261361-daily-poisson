@@ -13,6 +13,7 @@ export default function Create() {
     category: "",
     description: "",
     level: "",
+    question: 0,
   });
 
   const [tags, setTags] = useState([]);
