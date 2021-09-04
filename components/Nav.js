@@ -4,33 +4,14 @@ import { useState, useContext, useRef, useEffect } from "react";
 import { UserContext } from "@lib/UserContext";
 import { LogoutButton } from "@components/Auth";
 import { FaBars } from "react-icons/fa";
+import { useClickOutSide } from "@lib/useClickOutSide";
 
 export default function Nav() {
   const [usermenu, setUserMenu] = useState(false);
   const user = useContext(UserContext);
-  const navRef = useRef(null);
-
-  function clickOutsideNav(ref) {
-    function handleClickOutside(event) {
-      if (ref.current && !ref.current.contains(event.target)) {
-        setUserMenu(false);
-      }
-    }
-  }
-  useEffect(() => {
-    /**
-     * Alert if clicked on outside of element
-     */
-
-    // Bind the event listener
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      // Unbind the event listener on clean up
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [ref]);
-
-  clickOutsideNav(navRef);
+  const navRef = useClickOutSide(() => {
+    setUserMenu(false);
+  });
 
   return (
     <nav className="nav">
