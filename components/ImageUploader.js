@@ -4,7 +4,6 @@ import { auth, storage, STATE_CHANGED } from "@lib/firebase";
 export default function ImageUploader({ setImgURL, placeholder }) {
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [downloadURL, setDownloadURL] = useState(null);
 
   const uploadFile = async (e) => {
     const file = Array.from(e.target.files)[0];
@@ -26,7 +25,6 @@ export default function ImageUploader({ setImgURL, placeholder }) {
       task
         .then((d) => ref.getDownloadURL())
         .then((url) => {
-          setDownloadURL(url);
           setImgURL(url);
           setUploading(false);
         });
@@ -46,8 +44,6 @@ export default function ImageUploader({ setImgURL, placeholder }) {
           />
         </label>
       )}
-
-      {/* {downloadURL && <code>{downloadURL}</code>} */}
     </div>
   );
 }
