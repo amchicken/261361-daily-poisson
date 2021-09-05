@@ -19,6 +19,9 @@ $nav-height: 70px;
 
 body {
     overflow: auto;
+    background: url("../public/img/bgpic.png");
+    mix-blend-mode: lighten;
+    background-size: cover;
 }
 
 a {
@@ -26,5 +29,6 @@ a {
     text-decoration: none;
 }
 
+@import "container";
 @import "auth";
 @import "nav";

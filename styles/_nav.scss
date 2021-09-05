@@ -1,18 +1,19 @@
 .nav {
-    position: fixed;
+    position: relative;
     height: $nav-height;
     align-items: center;
     padding: 2rem;
     font-size: 2rem;
     background: transparent;
+    width: 100%;
     &__float {
         position: absolute;
-        background: #4800a7;
+        background: rgba(#6426b6, 0.4);
         mix-blend-mode: darken;
         top: 0;
         left: 0;
         height: 100vh;
-        width: 20vw;
+        width: 100%;
         z-index: 90;
         &__top {
             margin-top: 2rem;

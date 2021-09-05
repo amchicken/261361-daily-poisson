@@ -1,0 +1,128 @@
+.container {
+    display: grid;
+    width: 100vw;
+    height: 100vh;
+    grid-template-columns: 20% 80%;
+    overflow: hidden;
+    &__right {
+        width: 80%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 5% 75% 10%;
+        margin: 3rem 0rem 0rem 8rem;
+        &__header {
+            display: grid;
+            grid-template-columns: 15% 15% 70%;
+            grid-template-rows: 100%;
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 5px;
+            width: 100%;
+            color: white;
+            font-family: $font-oswald;
+            border-bottom: 1px solid;
+            border-image-slice: 1;
+            border-image-source: linear-gradient(
+                90deg,
+                rgba(222, 56, 216, 1) 0%,
+                rgba(190, 17, 212, 1) 31%,
+                rgba(93, 41, 136, 1) 98%
+            );
+            span {
+                margin-left: 0.5rem;
+                font-size: 1.3rem;
+                font-weight: 300;
+                margin-bottom: 3px;
+            }
+            div {
+                position: absolute;
+                right: 10px;
+                bottom: 3px;
+                font-size: 0.8rem;
+                font-weight: 200;
+            }
+        }
+        &__content {
+            display: grid;
+            grid-template-columns: 25% 25% 25%;
+            grid-template-rows: 50% 50%;
+            grid-column-gap: 1.2rem;
+            grid-row-gap: 2rem;
+            margin: 1rem -3rem 1rem 8rem;
+            &__card {
+                position: relative;
+                &__show {
+                    height: 100%;
+                    display: grid;
+                    grid-template-columns: 100%;
+                    grid-template-rows: 70% 30%;
+                    font-family: $font-oswald;
+                    font-weight: 300;
+                    div {
+                        display: flex;
+                        flex-direction: column;
+                        padding-left: 1rem;
+                        padding-top: 0.4rem;
+                        background: rgba(#6426b6, 0.5);
+                        p {
+                            color: white;
+                            font-size: 1rem;
+                        }
+                        h4 {
+                            margin: 0;
+                            font-size: 0.7rem;
+                            color: white;
+                            font-weight: 200;
+                        }
+                        span {
+                            color: #ff5555;
+                        }
+                    }
+                }
+                &__float {
+                    position: absolute;
+                    bottom: 21%;
+                    right: 15%;
+                    width: 3.3rem;
+                    height: 3rem;
+                    box-shadow: 0px 394px 287px rgba(7, 10, 30, 0.95),
+                        0px 164.604px 119.902px rgba(7, 10, 30, 0.60703),
+                        0px 88.0051px 64.1052px rgba(7, 10, 30, 0.465217),
+                        0px 49.3349px 35.9369px rgba(7, 10, 30, 0.367818),
+                        0px 26.2014px 19.0858px rgba(7, 10, 30, 0.282065),
+                        0px 10.903px 7.94203px rgba(7, 10, 30, 0.182445);
+                }
+            }
+        }
+        &__footer {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            button {
+                position: absolute;
+                bottom: 10px;
+                background: none;
+                outline: none;
+                border: none;
+                color: #48f36e;
+                background: rgba(#201d41, 0.8);
+                border-radius: 2rem;
+                padding-left: 4rem;
+                padding-right: 4rem;
+                height: 40%;
+                border: 1px solid rgba(#0085ff, 0.3);
+                font-size: 0.74rem;
+            }
+        }
+    }
+
+    &__footer {
+        position: absolute;
+        right: 2rem;
+        bottom: 1.5rem;
+        color: #48f36e;
+        font-size: 0.8rem;
+        font-family: $font-oswald;
+    }
+}

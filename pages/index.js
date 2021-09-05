@@ -9,8 +9,13 @@ export default function Home() {
 
     return (
         <>
-            <Nav />
-            <ChallangeSelector />
+            <div className="container">
+                <Nav />
+                <ChallangeSelector />
+                <div className="container__footer">
+                    DAILYPOISSON 2021 | SITE
+                </div>
+            </div>
         </>
     );
 }
