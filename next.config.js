@@ -5,6 +5,7 @@ module.exports = {
       "via.placeholder.com",
       "lh3.googleusercontent.com",
       "firebasestorage.googleapis.com",
+      "graph.facebook.com",
     ],
   },
 };

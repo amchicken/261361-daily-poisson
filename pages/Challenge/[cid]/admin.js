@@ -69,7 +69,7 @@ export default function AddQuestionToChallenge() {
         setQuestionList(
           questionsList.map((doc) => (doc.id === values.id ? values : doc))
         );
-        toast.success(`Moddd updatee to question ${values.name}`);
+        toast.success(`Moddd updatee to question ${values.question}`);
       });
     } else {
       //CREATE NEW QUESTION
@@ -80,7 +80,7 @@ export default function AddQuestionToChallenge() {
       batch.set(questionRef, mod);
       batch.commit().then(() => {
         setQuestionList((old) => [...old, { ...values, id: questionRef.id }]);
-        toast.success(`Create question ${values.name} done`);
+        toast.success(`Create question ${values.question} done`);
       });
     }
   };
