@@ -4,7 +4,9 @@ import { auth, firestore } from "@lib/firebase";
 import Image from "next/image";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/router";
+import { AiOutlineCloseCircle } from "react-icons/ai";
 import ImageUploader from "@components/ImageUploader";
+import Nav from "@components/Nav";
 
 export default function Create() {
     const router = useRouter();
@@ -41,68 +43,88 @@ export default function Create() {
     };
 
     return (
-        <div>
-            <form onSubmit={onSubmit}>
-                <input
-                    type="text"
-                    name="name"
-                    value={values.name}
-                    onChange={onChange}
-                    placeholder="name this challenge"
-                />
-                {imgURL === null ? (
-                    <ImageUploader
-                        placeholder="thumbnail"
-                        setImgURL={setImgURL}
-                    />
-                ) : (
-                    <Image
-                        src={imgURL}
-                        width={300}
-                        height={300}
-                        alt="thumnail"
-                    />
-                )}
-                <input
-                    type="text"
-                    name="category"
-                    value={values.category}
-                    onChange={onChange}
-                    placeholder="category"
-                />
-                <input
-                    type="text"
-                    name="level"
-                    value={values.level}
-                    onChange={onChange}
-                    placeholder="level"
-                />
-                descriptions
-                <textarea
-                    onChange={onChange}
-                    name="description"
-                    value={values.description}
-                />
-                <div></div>
-                <button type="submit">create</button>
-            </form>
-            <TagsGroup tags={tags} setTags={setTags} />
-            <div>
-                The Creator
-                <Image
-                    height="80"
-                    width="80"
-                    alt="profilepic"
-                    src={auth.currentUser.photoURL}
-                />
-                <br />@{auth.currentUser.displayName}
-                <br />
-                publish date {new Date().toISOString().split("T")[0]}
-                <br />
-                More from @{auth.currentUser.displayName}
-                <br />
+        <>
+            <div className="container2">
+                <div className="container2__inside">
+                    <div className="container2__inside__header">
+                        <input
+                            autoComplete="off"
+                            type="text"
+                            name="name"
+                            value={values.name}
+                            onChange={onChange}
+                            placeholder="Name This Challenge"
+                        />
+                        <p>&#10006;</p>
+                    </div>
+                    <div className="container2__inside__content">
+                        <div className="container2__inside__content__1">
+                            About
+                        </div>
+                        <div className="container2__inside__content__2">
+                            <div className="container2__inside__content__2__left">
+                                <ImageUploader
+                                    placeholder={"Deck Thumbnail"}
+                                    setImgURL={setImgURL}
+                                />
+                                <div>
+                                    <input
+                                        autoComplete="off"
+                                        type="text"
+                                        name="category"
+                                        value={values.category}
+                                        onChange={onChange}
+                                        placeholder="Category"
+                                    />
+                                </div>
+                                <div>
+                                    <input
+                                        autoComplete="off"
+                                        type="text"
+                                        name="level"
+                                        value={values.level}
+                                        onChange={onChange}
+                                        placeholder="Level"
+                                    />
+                                </div>
+                                <span>Description</span>
+                                <textarea
+                                    onChange={onChange}
+                                    name="description"
+                                    value={values.description}
+                                    placeholder="Describes something..."
+                                />
+                            </div>
+                            <div className="container2__inside__content__2__right">
+                                <div className="container2__inside__content__2__right__top">
+                                    <div>The Creator</div>
+                                    <Image
+                                        height="150"
+                                        width="150"
+                                        alt="profilepic"
+                                        src={auth.currentUser.photoURL}
+                                    />
+                                    <div>{auth.currentUser.displayName}</div>
+                                    <div>
+                                        publish date{" "}
+                                        {new Date().toISOString().split("T")[0]}
+                                    </div>
+                                </div>
+                                <div className="container2__inside__content__2__right__bottom">
+                                    More from {auth.currentUser.displayName}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="container2__inside__footer">
+                        <TagsGroup tags={tags} setTags={setTags} />
+                        <button onClick={onSubmit}>
+                            Create Challenges {">>"}
+                        </button>
+                    </div>
+                </div>
             </div>
-        </div>
+        </>
     );
 }
 
@@ -121,21 +143,23 @@ const TagsGroup = ({ tags, setTags }) => {
     };
 
     return (
-        <>
-            {" "}
-            tags:{" "}
+        <div>
+            <Image src="/../public/img/tag.png" width="30" height="30" />
             {tags.map((doc, idx) => (
                 <span key={idx}>
                     {doc}
-                    <button onClick={() => removeTags(idx)}>x</button>
+                    <button onClick={() => removeTags(idx)}>
+                        <AiOutlineCloseCircle />
+                    </button>
                 </span>
             ))}
             <input
                 type="text"
+                placeholder="Add Tag"
                 onChange={(e) => setTag(e.target.value)}
                 value={tag}
             />
-            <button onClick={addTag}>addtags</button>
-        </>
+            <button onClick={addTag}>+</button>
+        </div>
     );
 };

@@ -75,7 +75,7 @@ export default function Nav() {
                         height={100}
                         alt="profile-image"
                     />
-                    <span>@{user.displayName}</span>
+                    <span>{user.displayName}</span>
                     <div className="nav__float__top line"></div>
                 </div>
                 <ul className="nav__float__list">
