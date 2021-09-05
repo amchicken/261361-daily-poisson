@@ -52,7 +52,7 @@ export default function Nav() {
                         <li>REPOSITORY</li>
                         <li>PRIVATE SESSION</li>
                         <li>
-                            <FaSearch style={{ color: "#48F36E" }} />
+                            <FaSearch />
                         </li>
                         <span>CONTACT | ABOUT | HELP CENTER</span>
                     </ul>
@@ -82,7 +82,7 @@ export default function Nav() {
                     <li>REPOSITORY</li>
                     <li>PRIVATE SESSION</li>
                     <li>
-                        <FaSearch style={{ color: "#48F36E" }} />
+                        <FaSearch />
                     </li>
                     <span>CONTACT | ABOUT | HELP CENTER</span>
                 </ul>
