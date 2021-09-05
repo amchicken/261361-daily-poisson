@@ -85,7 +85,7 @@ export function LoginRegister() {
                         <div className="auth__card__left">
                             <div className="auth__card__left__head">
                                 <Image
-                                    src="/../public/img/logo.png"
+                                    src="/img/logo.png"
                                     width="90"
                                     height="64"
                                     alt=""
@@ -174,7 +174,7 @@ export function LoginRegister() {
                         <div className="auth__card__left">
                             <div className="auth__card__left__head">
                                 <Image
-                                    src="/../public/img/logo.png"
+                                    src="/img/logo.png"
                                     width="90"
                                     height="64"
                                     alt=""

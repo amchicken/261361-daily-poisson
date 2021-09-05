@@ -42,6 +42,10 @@ export default function Create() {
         }
     };
 
+    const goBack = () => {
+        router.push("/");
+    };
+
     return (
         <>
             <div className="container2">
@@ -55,7 +59,7 @@ export default function Create() {
                             onChange={onChange}
                             placeholder="Name This Challenge"
                         />
-                        <p>&#10006;</p>
+                        <p onClick={goBack}>&#10006;</p>
                     </div>
                     <div className="container2__inside__content">
                         <div className="container2__inside__content__1">
@@ -144,7 +148,7 @@ const TagsGroup = ({ tags, setTags }) => {
 
     return (
         <div>
-            <Image src="/../public/img/tag.png" width="30" height="30" />
+            <Image src="/img/tag.png" width="30" height="30" />
             {tags.map((doc, idx) => (
                 <span key={idx}>
                     {doc}

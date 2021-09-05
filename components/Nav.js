@@ -45,11 +45,7 @@ export default function Nav() {
                         <div className="nav__float__top line"></div>
                     </div>
                     <ul className="nav__float__list">
-                        <Image
-                            src="/../public/img/logo.png"
-                            width="90"
-                            height="64"
-                        />
+                        <Image src="/img/logo.png" width="90" height="64" />
                         <li>PROFILE</li>
                         <li>DAILY CHALLENGES</li>
                         <li>LEADERBOARD</li>
@@ -79,11 +75,7 @@ export default function Nav() {
                     <div className="nav__float__top line"></div>
                 </div>
                 <ul className="nav__float__list">
-                    <Image
-                        src="/../public/img/logo.png"
-                        width="90"
-                        height="64"
-                    />
+                    <Image src="/img/logo.png" width="90" height="64" />
                     <li>PROFILE</li>
                     <li>DAILY CHALLENGES</li>
                     <li>LEADERBOARD</li>
