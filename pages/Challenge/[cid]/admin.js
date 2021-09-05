@@ -55,17 +55,15 @@ export default function AddQuestionToChallenge() {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    const ref = firestore
-      .collection("challenges")
-      .doc(cid)
-      .collection("questions");
+    const ref = firestore.collection("challenges").doc(cid);
     const mod = { ...values };
     delete mod.id;
 
     const batch = firestore.batch();
 
     if (values.id !== null) {
-      const questionRef = ref.doc(values.id);
+      //MODIFY OLD QUESTION
+      const questionRef = ref.collection("questions").doc(values.id);
       batch.update(questionRef, mod);
       batch.commit().then(() => {
         setQuestionList(
@@ -74,7 +72,11 @@ export default function AddQuestionToChallenge() {
         toast.success(`Moddd updatee to question ${values.name}`);
       });
     } else {
-      const questionRef = ref.doc();
+      //CREATE NEW QUESTION
+      const questionRef = ref.collection("questions").doc();
+      batch.update(ref, {
+        question: Increment(1),
+      });
       batch.set(questionRef, mod);
       batch.commit().then(() => {
         setQuestionList((old) => [...old, { ...values, id: questionRef.id }]);
