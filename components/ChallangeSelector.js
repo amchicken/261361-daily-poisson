@@ -1,13 +1,19 @@
 import { useChallangeData } from "@lib/useChallangeData";
 import { IoReload } from "react-icons/io5";
+import { useRouter } from "next/router";
 import Image from "next/image";
 
 export default function ChallangeSelector() {
+    const router = useRouter();
     const [snapshot, loading] = useChallangeData();
 
     if (loading) {
         return <div style={{ display: "flex" }}>loading...</div>;
     }
+
+    const createChallenge = () => {
+        router.push("/Challenge/create");
+    };
 
     return (
         <div className="container__right">
@@ -46,7 +52,7 @@ export default function ChallangeSelector() {
                 ))}
             </div>
             <div className="container__right__footer">
-                <button>REQUEST YOUR {"Q&A"}</button>
+                <button onClick={createChallenge}>REQUEST YOUR {"Q&A"}</button>
             </div>
         </div>
     );
