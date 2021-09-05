@@ -41,7 +41,7 @@ export default function ChallangeSelector() {
                             />
                             <div>
                                 <p>{doc.name}</p>
-                                <h4>x points</h4>
+                                <h4>{doc.level.toUpperCase()}</h4>
                                 <span>{doc.category}</span>
                             </div>
                         </div>
