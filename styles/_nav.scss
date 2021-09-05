@@ -54,6 +54,11 @@
             li {
                 position: relative;
                 top: 10px;
+                cursor: pointer;
+                transition: ease 0.5s;
+            }
+            li:hover {
+                color: #48f36e;
             }
             div {
                 position: relative;

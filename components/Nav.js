@@ -19,17 +19,7 @@ export default function Nav() {
   if (isMobile) {
     return (
       <nav className="nav">
-        {usermenu ? (
-          <></>
-        ) : (
-          <div className="nav__left-side" onClick={() => setUserMenu(true)}>
-            <FaBars />
-          </div>
-        )}
-        <div
-          className={usermenu ? "nav__float show" : "nav__float hidden"}
-          ref={navRef}
-        >
+        <div className="nav__float show" ref={navRef}>
           <div className="nav__float__top">
             <Image
               src={user.photoURL}
@@ -37,7 +27,7 @@ export default function Nav() {
               height={100}
               alt="profile-image"
             />
-            <span>@{user.displayName}</span>
+            <span>{user.displayName}</span>
             <div className="nav__float__top line"></div>
           </div>
           <ul className="nav__float__list">
@@ -48,9 +38,12 @@ export default function Nav() {
             <li>REPOSITORY</li>
             <li>PRIVATE SESSION</li>
             <li>
-              <FaSearch style={{ color: "#48F36E" }} />
+              <FaSearch />
             </li>
-            <span>CONTACT | ABOUT | HELP CENTER</span>
+            <span>
+              CONTACT | ABOUT | HELP CENTER |{" "}
+              <b onClick={() => auth.signOut()}>{"   "}Logout</b>
+            </span>
           </ul>
         </div>
       </nav>
