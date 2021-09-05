@@ -6,6 +6,7 @@ import Image from "next/image";
 import { firestore, Increment } from "@lib/firebase";
 import { useCollectionDataOnce } from "react-firebase-hooks/firestore";
 import toast from "react-hot-toast";
+import JSONPretty from "react-json-pretty";
 
 const CHOICES = 4;
 const initData = {
@@ -53,55 +54,37 @@ export default function AddQuestionToChallenge() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+
+    const ref = firestore
+      .collection("challenges")
+      .doc(cid)
+      .collection("questions");
+    const mod = { ...values };
+    delete mod.id;
+
     const batch = firestore.batch();
 
-    const ref = firestore.collection("challenges").doc(cid);
-    batch.update(ref, {
-      question: Increment(1),
-    });
-
-    let batchObject = {
-      ...values,
-      time: parseInt(values.time),
-      imgURL,
-    };
-
-    let questionRef = ref.collection("questions");
-
-    if (values.id === null) {
-      questionRef = questionRef.doc();
-      setQuestionList((old) => [
-        ...old,
-        {
-          ...batchObject,
-          id: ref.id,
-        },
-      ]);
-    } else {
-      questionRef = questionRef.doc(values.id);
-      const temp = questionsList;
-      temp.splice(
-        questionsList.findIndex((doc) => doc.id === values.id),
-        1,
-        batchObject
-      );
-      setQuestionList(temp);
-    }
-
-    delete batchObject.id;
-
-    batch.set(questionRef, batchObject);
-    try {
+    if (values.id !== null) {
+      const questionRef = ref.doc(values.id);
+      batch.update(questionRef, mod);
       batch.commit().then(() => {
-        toast.success(`Question "${values.question}" save success`);
+        setQuestionList(
+          questionsList.map((doc) => (doc.id === values.id ? values : doc))
+        );
+        toast.success(`Moddd updatee to question ${values.name}`);
       });
-    } catch (err) {
-      console.log(err);
+    } else {
+      const questionRef = ref.doc();
+      batch.set(questionRef, mod);
+      batch.commit().then(() => {
+        setQuestionList((old) => [...old, { ...values, id: questionRef.id }]);
+        toast.success(`Create question ${values.name} done`);
+      });
     }
   };
 
   return (
-    <div>
+    <div style={{ backgroundColor: "#fff" }}>
       challenge ID: {cid} <br />
       {loading ? (
         "LOAINGD..."
@@ -116,6 +99,7 @@ export default function AddQuestionToChallenge() {
           cid={cid}
         />
       )}
+      {/* <JSONPretty id="json-pretty" data={questionsList} /> */}
       <form onSubmit={onSubmit}>
         <input
           type="text"
@@ -155,7 +139,7 @@ export default function AddQuestionToChallenge() {
         <button type="submit">save</button>
       </form>
       <button onClick={resetForm}>ResetForm</button>
-      <div>debug: {JSON.stringify(values)}</div>
+      {/* <div>debug: {JSON.stringify(values)}</div> */}
     </div>
   );
 }
@@ -184,7 +168,7 @@ const InputGroup = ({ choices, onChange }) => {
 };
 
 const QuestionList = ({ data, setForm, setImgURL, cid, setQuestionList }) => {
-  const removeQuestion = async (id) => {
+  const removeQuestion = async (id, question) => {
     const batch = firestore.batch();
     const root = firestore.collection("challenges").doc(cid);
     const ref = root.collection("questions").doc(id);
@@ -193,9 +177,10 @@ const QuestionList = ({ data, setForm, setImgURL, cid, setQuestionList }) => {
       question: Increment(-1),
     });
     batch.delete(ref);
-    batch
-      .commit()
-      .then(() => setQuestionList(data.filter((doc) => doc.id !== id)));
+    batch.commit().then(() => {
+      toast.success(`remove question: ${question}`);
+      setQuestionList(data.filter((doc) => doc.id !== id));
+    });
   };
 
   return (
@@ -210,7 +195,9 @@ const QuestionList = ({ data, setForm, setImgURL, cid, setQuestionList }) => {
           >
             {doc.question}
           </h2>
-          <button onClick={() => removeQuestion(doc.id)}>Delete</button>
+          <button onClick={() => removeQuestion(doc.id, doc.question)}>
+            Delete
+          </button>
         </li>
       ))}
     </ul>
