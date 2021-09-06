@@ -45,7 +45,9 @@ export default function ChallangeSelector() {
                                 </div>
                             </div>
                             <div className="container__right__content__card__float">
-                                <Image src="/img/btn.png" layout="fill" />
+                                <div>
+                                    <Image src="/img/btn.png" layout="fill" />
+                                </div>
                             </div>
                         </div>
                     </Link>
