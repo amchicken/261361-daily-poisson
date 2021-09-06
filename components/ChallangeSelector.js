@@ -32,7 +32,7 @@ export default function ChallangeSelector() {
             <div className="container__right__content__card">
               <div className="container__right__content__card__show">
                 <Image
-                  src={doc.thumbnail}
+                  src={doc.thumbnail || "/notfound.png"}
                   width={100}
                   height={100}
                   quality={100}

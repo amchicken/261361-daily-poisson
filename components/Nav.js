@@ -16,7 +16,7 @@ export default function Nav() {
       <div className="nav__float show">
         <div className="nav__float__top">
           <Image
-            src={user.photoURL}
+            src={user.photoURL || "/notfound.png"}
             width={100}
             height={100}
             alt="profile-image"

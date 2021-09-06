@@ -27,7 +27,7 @@ export default function ChallengeIndex() {
               (
                 await firestore
                   .collection("usernames")
-                  .doc(data.createdBy)
+                  .doc(target.createdBy)
                   .get()
               ).data()
             );
@@ -53,7 +53,7 @@ export default function ChallengeIndex() {
                 {data.name}
                 <br />
                 <Image
-                  src={data.thumbnail}
+                  src={data.thumbnail || "/notfound.png"}
                   width={100}
                   height={100}
                   alt="challenge thumbnail"

@@ -106,7 +106,7 @@ export default function Create() {
                     height="150"
                     width="150"
                     alt="profilepic"
-                    src={auth.currentUser.photoURL}
+                    src={auth.currentUser.photoURL || "/notfound.png"}
                   />
                   <div>{auth.currentUser.displayName}</div>
                   <div>
@@ -145,7 +145,7 @@ const TagsGroup = ({ tags, setTags }) => {
 
   return (
     <div>
-      <Image src="/img/tag.png" width="30" height="30" />
+      <Image src="/img/tag.png" width="30" height="30" alt="" />
       {tags.map((doc, idx) => (
         <span key={idx}>
           {doc}
