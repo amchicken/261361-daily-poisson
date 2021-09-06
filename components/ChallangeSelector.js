@@ -41,9 +41,7 @@ export default function ChallangeSelector() {
                 <div>
                   <p>{doc.name}</p>
                   <p>{doc.level.toUpperCase()}</p>
-                  <h4>
-                    {doc.question} Question {doc.question > 1 ? s : ""}
-                  </h4>
+                  <h4>{doc.question} Items</h4>
                   <span>{doc.category}</span>
                 </div>
               </div>

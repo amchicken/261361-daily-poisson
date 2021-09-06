@@ -79,6 +79,12 @@ export default function ChallengeIndex() {
                 The Creator:{" "}
                 {owner && (
                   <>
+                    <Image
+                      src={owner.photoURL || "/notfound.png"}
+                      width={100}
+                      height={100}
+                      alt="createorphoto"
+                    />
                     @{owner.username} <br />
                     Publisthed Date:{data.createdAt?.toDate().toJSON()}
                     <br />
