@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps }) {
   else {
     if (!user) return <LoginRegister />;
     return (
-      <UserContext.Provider value={user}>
+      <UserContext.Provider value={{ user: user, loading: loading }}>
         <Toaster />
         <Component {...pageProps} />
       </UserContext.Provider>
