@@ -215,8 +215,14 @@ export default function ProfilePage() {
                 </div>
             </div>
             <div className="container3__right">
-                <div className="container3__right__header"></div>
-                <div className="container3__right__content"></div>
+                <div className="container3__right__header">
+                    HISTORY
+                    {/* GET HISTORY FROM DATABASE */}
+                </div>
+                <div className="container3__right__content">
+                    DAILY RANDOM QUEST
+                    {/* ON CLICK ROUTE TO SOME RANDOM CHALLENGE ID */}
+                </div>
                 <div className="container3__right__footer"></div>
             </div>
         </div>

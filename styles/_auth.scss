@@ -14,14 +14,7 @@
 }
 
 .auth-container {
-    background-image: url("../images/background.png"),
-        linear-gradient(
-            180deg,
-            rgba(16, 0, 50, 0.8) 0%,
-            rgba(23, 4, 47, 0.8) 28.13%,
-            rgba(22, 11, 51, 0.8) 76.89%,
-            rgba(31, 2, 112, 0.704) 100%
-        );
+    background-image: url("../public/img/authBackground2.png");
     background-size: cover;
     background-position: -40px 90%;
     height: 100vh;
@@ -48,12 +41,13 @@
     width: 70%;
     height: 100%;
     border-radius: 20px;
-    background: transparent;
-    display: flex;
+    display: grid;
+    grid-template-columns: 3fr 2fr;
     padding: 2rem;
     color: white;
     transition: opacity 1s linear;
-
+    background: url("../public/img/authBackground.png");
+    background-size: cover;
     &__left {
         flex: 5;
         display: flex;
@@ -277,21 +271,6 @@
                 }
             }
         }
-    }
-    &::after {
-        z-index: -1;
-        content: "";
-        position: absolute;
-        top: 0px;
-        right: 0px;
-        bottom: 0px;
-        left: 0px;
-        opacity: 0.65;
-        border-radius: 20px;
-        background-image: url("../images/card-background.jpg");
-        mix-blend-mode: darken;
-        background-size: 1000px 1000px;
-        background-repeat: no-repeat;
     }
 }
 
