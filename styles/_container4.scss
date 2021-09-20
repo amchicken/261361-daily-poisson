@@ -8,12 +8,15 @@
         width: 100%;
         height: 100%;
         background: rgba(#1254d6, 0.2);
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 8fr 1fr;
         &__header {
-            padding-top: 2rem;
             position: relative;
-            display: flex;
-            justify-content: center;
+            display: grid;
+            justify-items: center;
             align-items: center;
+            grid-template-columns: 1fr 4fr;
             input {
                 text-align: center;
                 width: 20%;
@@ -21,7 +24,7 @@
                 outline: none;
                 border: none;
                 border-bottom: 2px solid gray;
-                font-size: 1.4rem;
+                font-size: 2rem;
                 font-weight: 400;
                 font-family: $font-oswald;
                 color: white;
@@ -39,6 +42,184 @@
                 font-weight: 100;
                 color: rgba(#db18df, 0.7);
                 cursor: pointer;
+            }
+        }
+        &__content {
+            display: grid;
+            grid-template-columns: 1fr 4fr;
+            grid-template-rows: 1fr;
+            width: 100%;
+            height: 100%;
+            &__left {
+                padding: 0 0.5rem;
+                height: 100%;
+                & > div {
+                    width: 100%;
+                    background-color: white;
+                    font-family: $font-oswald;
+                    font-weight: 600;
+                    font-size: 1.5rem;
+                    text-align: center;
+                }
+                ul {
+                    overflow-x: hidden;
+                    overflow-y: scroll;
+                    &::-webkit-scrollbar {
+                        -webkit-appearance: none;
+                        width: 0.6rem;
+                    }
+                    &::-webkit-scrollbar-thumb {
+                        background: #fb25ff;
+                        border-radius: 1px;
+                    }
+                    li {
+                        position: relative;
+                        padding: 1rem 0;
+                        border-bottom: 1px solid rgba(gray, 0.5);
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        text-align: center;
+                        & > h2 {
+                            font-weight: 300;
+                            font-family: $font-oswald;
+                            color: white;
+                        }
+                        span {
+                            position: absolute;
+                            top: 1rem;
+                            right: 1.2rem;
+                            font-size: 1.2rem;
+                            color: white;
+                        }
+                    }
+                }
+                & > span {
+                    margin-top: 1.5rem;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    text-align: center;
+                    & > button {
+                        background: none;
+                        box-shadow: none;
+                        outline: none;
+                        border: none;
+                        border: 1px solid rgba(#fb25ff, 0.3);
+                        background: rgba(black, 0.4);
+                        color: white;
+                        font-size: 1.5rem;
+                        padding: 0.5rem 1rem;
+                        border-radius: 1rem;
+                        span {
+                            font-size: 1rem;
+                        }
+                    }
+                }
+            }
+            &__right {
+                width: 100%;
+                height: 100%;
+                & > form {
+                    width: 100%;
+                    height: 100%;
+                    display: grid;
+                    grid-template-rows: 1fr 4fr 2fr 1fr;
+                    & > .title {
+                        margin-left: 1rem;
+                        margin-right: 1rem;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        text-align: center;
+                        border: 1px solid rgba(#fb25ff, 0.5);
+                        background-color: rgba(black, 0.3);
+                        & > input {
+                            width: 100%;
+                            font-family: $font-oswald;
+                            font-weight: 500;
+                            font-size: 2rem;
+                            background: none;
+                            outline: none;
+                            border: none;
+                            text-align: center;
+                            color: white;
+                            &::placeholder {
+                                text-align: center;
+                                color: white;
+                            }
+                        }
+                    }
+                    & > .content {
+                        margin-left: 6rem;
+                        margin-right: 1rem;
+                        margin-top: 1.5rem;
+                        width: 100%;
+                        height: 100%;
+                        & > div {
+                            width: 100%;
+                            height: 100%;
+                            display: grid;
+                            grid-template-columns: 1fr 5fr;
+                            & > div:nth-child(1) {
+                                width: 100%;
+                                height: 100%;
+                                color: White;
+                                position: relative;
+                                top: 20%;
+                                label {
+                                    margin-left: 0.2rem;
+                                    font-size: 1.2rem;
+                                    svg {
+                                        font-size: 1.5rem;
+                                        margin-right: 0.6rem;
+                                    }
+                                    font-family: $font-oswald;
+                                    font-weight: 200;
+                                }
+                                select {
+                                    display: block;
+                                    background: none;
+                                    outline: none;
+                                    border: 1px solid #fb25ff;
+                                    color: white;
+                                    width: 100%;
+                                    height: 2.5rem;
+                                    font-size: 1.2rem;
+                                }
+                            }
+                            & > div:nth-child(2) {
+                                margin-left: 7rem;
+                                width: 100%;
+                                height: 100%;
+                                div {
+                                    width: 50%;
+                                    height: 100%;
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    text-align: center;
+                                    border: 1px solid rgba(#fb25ff, 0.5);
+                                    background: rgba(black, 0.3);
+                                    label {
+                                        color: White;
+                                        font-size: 2.3rem;
+                                        font-family: $font-oswald;
+                                        font-weight: 300;
+                                    }
+                                    input {
+                                        display: none;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .choice {
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        grid-template-rows: 1fr 1fr;
+                    }
+                }
             }
         }
     }

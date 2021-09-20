@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { firestore, Increment } from "@lib/firebase";
 import { useCollectionDataOnce } from "react-firebase-hooks/firestore";
+import { FiClock } from "react-icons/fi";
 import toast from "react-hot-toast";
 import JSONPretty from "react-json-pretty";
 
@@ -98,6 +99,7 @@ export default function AddQuestionToChallenge() {
         <div className="container4">
             <div className="container4__inside">
                 <div className="container4__inside__header">
+                    <div></div>
                     <input
                         autoComplete="off"
                         type="text"
@@ -108,77 +110,96 @@ export default function AddQuestionToChallenge() {
                     />
                     <p onClick={goBack}>&#10006;</p>
                 </div>
-                challenge ID: {cid} <br />
-                {loading ? (
-                    "LOAINGD..."
-                ) : questionsList.length === 0 ? (
-                    "no questions"
-                ) : (
-                    <QuestionList
-                        data={questionsList}
-                        setQuestionList={setQuestionList}
-                        setForm={setForm}
-                        setImgURL={setImgURL}
-                        cid={cid}
-                    />
-                )}
-                {/* <JSONPretty id="json-pretty" data={questionsList} /> */}
-                <form onSubmit={onSubmit}>
-                    <input
-                        type="text"
-                        placeholder="Start Typing Your Question"
-                        value={values.question}
-                        name="question"
-                        onChange={onChange}
-                    />
-                    {imgURL === null ? (
-                        <ImageUploader
-                            placeholder="thumbnail"
-                            setImgURL={setImgURL}
-                        />
+                <div className="container4__inside__content">
+                    {loading ? (
+                        "LOADING..."
                     ) : (
-                        <Image
-                            src={imgURL}
-                            width={300}
-                            height={300}
-                            alt="thumbnail"
-                        />
+                        <div className="container4__inside__content__left">
+                            <div>ALL LISTS</div>
+                            <QuestionList
+                                data={questionsList}
+                                setQuestionList={setQuestionList}
+                                setForm={setForm}
+                                setImgURL={setImgURL}
+                                cid={cid}
+                            />
+                            <span>
+                                <button onClick={resetForm}>
+                                    + <span>ADD LIST</span>
+                                </button>
+                            </span>
+                        </div>
                     )}
-                    <br />
-                    <label>level</label>
-                    <select
-                        value={values.level}
-                        name="level"
-                        onChange={onChange}
-                    >
-                        <option value="Easy">Easy</option>
-                        <option value="Med">Med</option>
-                        <option value="Hard">Hard</option>
-                    </select>
-                    <br />
-                    <label>Time</label>
-                    <select value={values.time} name="time" onChange={onChange}>
-                        <option value={5}>5</option>
-                        <option value={10}>10</option>
-                        <option value={15}>15</option>
-                    </select>
-                    <br />
-                    <InputGroup choices={values.choices} onChange={onChange} />
-                    <br />
-                    <label>correct choices</label>
-                    <select
-                        value={values.correct}
-                        name="correct"
-                        onChange={onChange}
-                    >
-                        {values.choices.map((doc, idx) => (
-                            <option key={idx}>{doc}</option>
-                        ))}
-                    </select>
-                    <button type="submit">save</button>
-                </form>
-                <button onClick={resetForm}>ResetForm</button>
-                {/* <div>debug: {JSON.stringify(values)}</div> */}
+                    <div className="container4__inside__content__right">
+                        {/* <JSONPretty id="json-pretty" data={questionsList} /> */}
+                        <form onSubmit={onSubmit}>
+                            <div className="title">
+                                <input
+                                    type="text"
+                                    placeholder="Start Typing Your Question"
+                                    value={values.question}
+                                    name="question"
+                                    onChange={onChange}
+                                />
+                            </div>
+                            <div className="content">
+                                <div>
+                                    <div>
+                                        <label>
+                                            <FiClock />
+                                            Time Limit
+                                        </label>
+                                        <select
+                                            value={values.time}
+                                            name="time"
+                                            onChange={onChange}
+                                        >
+                                            <option value={5}>5</option>
+                                            <option value={10}>10</option>
+                                            <option value={15}>15</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        {imgURL === null ? (
+                                            <ImageUploader
+                                                placeholder="Upload image"
+                                                setImgURL={setImgURL}
+                                            />
+                                        ) : (
+                                            <Image
+                                                src={imgURL}
+                                                width={300}
+                                                height={300}
+                                                alt="thumbnail"
+                                            />
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="choice">
+                                <InputGroup
+                                    choices={values.choices}
+                                    onChange={onChange}
+                                />
+
+                                <label>correct choices</label>
+                                <select
+                                    value={values.correct}
+                                    name="correct"
+                                    onChange={onChange}
+                                >
+                                    {values.choices.map((doc, idx) => (
+                                        <option key={idx}>{doc}</option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div className="footer">
+                                <button type="submit">save</button>
+                            </div>
+                        </form>
+                        {/* <div>debug: {JSON.stringify(values)}</div> */}
+                    </div>
+                </div>
             </div>
         </div>
     );
@@ -224,7 +245,7 @@ const QuestionList = ({ data, setForm, setImgURL, cid, setQuestionList }) => {
     };
 
     return (
-        <ul>
+        <ul className="question-list">
             {data.map((doc) => (
                 <li key={doc.id}>
                     <h2
@@ -235,11 +256,9 @@ const QuestionList = ({ data, setForm, setImgURL, cid, setQuestionList }) => {
                     >
                         {doc.question}
                     </h2>
-                    <button
-                        onClick={() => removeQuestion(doc.id, doc.question)}
-                    >
-                        Delete
-                    </button>
+                    <span onClick={() => removeQuestion(doc.id, doc.question)}>
+                        X
+                    </span>
                 </li>
             ))}
         </ul>
