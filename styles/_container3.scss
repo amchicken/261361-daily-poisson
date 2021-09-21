@@ -31,7 +31,9 @@
                 justify-content: center;
                 align-items: center;
                 textarea {
-                    text-align: center;
+                    white-space: normal;
+                    text-align: justify;
+                    text-align-last: center;
                     background: none;
                     outline: none;
                     border: none;

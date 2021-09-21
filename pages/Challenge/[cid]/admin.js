@@ -20,7 +20,13 @@ const initData = {
     imgURL: null,
 };
 
+function useForceUpdate() {
+    const [value, setValue] = useState(0);
+    return () => setValue((value) => value + 1);
+}
+
 export default function AddQuestionToChallenge() {
+    const forceUpdate = useForceUpdate();
     const router = useRouter();
     const { cid } = router.query;
     const ref = firestore
@@ -177,24 +183,17 @@ export default function AddQuestionToChallenge() {
                                 </div>
                             </div>
                             <div className="choice">
-                                <InputGroup
-                                    choices={values.choices}
-                                    onChange={onChange}
-                                />
-
-                                <label>correct choices</label>
-                                <select
-                                    value={values.correct}
-                                    name="correct"
-                                    onChange={onChange}
-                                >
-                                    {values.choices.map((doc, idx) => (
-                                        <option key={idx}>{doc}</option>
-                                    ))}
-                                </select>
+                                <div>
+                                    <InputGroup
+                                        choices={values.choices}
+                                        onChange={onChange}
+                                        forceUpdate={forceUpdate}
+                                        values={values}
+                                    />
+                                </div>
                             </div>
                             <div className="footer">
-                                <button type="submit">save</button>
+                                <button type="submit">Save Question</button>
                             </div>
                         </form>
                         {/* <div>debug: {JSON.stringify(values)}</div> */}
@@ -205,24 +204,39 @@ export default function AddQuestionToChallenge() {
     );
 }
 
-const InputGroup = ({ choices, onChange }) => {
+const InputGroup = ({ choices, onChange, forceUpdate, values }) => {
     let Input = [];
     for (let i = 0; i < CHOICES; i++) {
         Input.push(
-            <input
-                key={i}
-                type="text"
-                placeholder={`${i + 1}`}
-                value={choices[i]}
-                onChange={(e) => {
-                    let data = [...choices];
-                    data[i] = e.target.value;
-                    onChange({
-                        target: { name: "choices", value: data },
-                    });
-                }}
-                required
-            />
+            <div>
+                <div>
+                    <div
+                        onClick={() => {
+                            values.correct = `${choices[i]}`;
+                            forceUpdate();
+                        }}
+                        style={
+                            values.correct == choices[i] && choices[i] != ""
+                                ? { border: "3px solid #48F36E" }
+                                : { border: "1px solid #fff" }
+                        }
+                    ></div>
+                </div>
+                <input
+                    key={i}
+                    type="text"
+                    placeholder={`Choice ${i + 1}`}
+                    value={choices[i]}
+                    onChange={(e) => {
+                        let data = [...choices];
+                        data[i] = e.target.value;
+                        onChange({
+                            target: { name: "choices", value: data },
+                        });
+                    }}
+                    required
+                />
+            </div>
         );
     }
     return Input;
