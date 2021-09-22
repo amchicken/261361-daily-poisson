@@ -65,12 +65,17 @@
                     overflow-x: hidden;
                     overflow-y: scroll;
                     &::-webkit-scrollbar {
-                        -webkit-appearance: none;
                         width: 0.6rem;
                     }
                     &::-webkit-scrollbar-thumb {
                         background: #fb25ff;
                         border-radius: 1px;
+                        &:hover {
+                            cursor: pointer;
+                        }
+                    }
+                    &::-webkit-scrollbar-track {
+                        background: transparent;
                     }
                     li {
                         position: relative;
