@@ -2,8 +2,11 @@
     font-family: $font-oswald;
     margin: 3rem 3rem;
     display: grid;
-    grid-template-columns: 70% 30%;
-    grid-template-rows: 100%;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
     &__left {
         display: grid;
         grid-template-columns: 100%;
@@ -193,16 +196,14 @@
                     &__bottom {
                         padding-top: 0.5rem;
                         border-top: 1px solid rgba(gray, 0.5);
-                        display: grid;
-                        grid-template-columns: 100%;
-                        grid-template-rows: 1fr 1fr 1fr;
-                        justify-items: center;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
                         div {
                             font-weight: 200;
                         }
                         button {
                             position: relative;
-                            bottom: 0.5rem;
                             border: none;
                             background: none;
                             box-shadow: none;
@@ -211,14 +212,12 @@
                             background: rgba(#000000, 0.5);
                             border: 1px solid rgba(#ff0000, 0.5);
                             border-radius: 1rem;
-                            padding-left: 1rem;
-                            padding-right: 1rem;
+                            padding: 1rem 1rem;
+                            cursor: pointer;
                         }
                     }
                 }
             }
         }
-    }
-    &__right {
     }
 }

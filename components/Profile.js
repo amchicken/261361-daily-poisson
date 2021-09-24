@@ -205,25 +205,12 @@ export default function ProfilePage() {
                                     </div>
                                 </div>
                                 <div className="container3__left__content__content__account__bottom">
-                                    <div>DEACTIVATE ACCOUNT</div>
-                                    <button>DELETE ACCOUNT</button>
                                     <button>DEACTIVATE ACCOUNT</button>
                                 </div>
                             </div>
                         )}
                     </div>
                 </div>
-            </div>
-            <div className="container3__right">
-                <div className="container3__right__header">
-                    HISTORY
-                    {/* GET HISTORY FROM DATABASE */}
-                </div>
-                <div className="container3__right__content">
-                    DAILY RANDOM QUEST
-                    {/* ON CLICK ROUTE TO SOME RANDOM CHALLENGE ID */}
-                </div>
-                <div className="container3__right__footer"></div>
             </div>
         </div>
     );
