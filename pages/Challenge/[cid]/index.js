@@ -95,7 +95,7 @@ export default function ChallengeIndex() {
                 {data.played.includes(auth.currentUser.uid) ? (
                   "ALREDY play this challenge"
                 ) : (
-                  <button onClick={() => router.push(`/Challenge/${cid}/play`)}>
+                  <button onClick={() => router.push(`/challenge/${cid}/play`)}>
                     Play
                   </button>
                 )}
