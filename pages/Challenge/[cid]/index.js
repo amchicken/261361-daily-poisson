@@ -1,9 +1,10 @@
 import { useRouter } from "next/router";
 import Nav from "@components/Nav";
-import { firestore } from "@lib/firebase";
+import { firestore, auth } from "@lib/firebase";
 import { useDocumentOnce } from "react-firebase-hooks/firestore";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { toast } from "react-hot-toast";
 
 export default function ChallengeIndex() {
   const router = useRouter();
@@ -90,6 +91,13 @@ export default function ChallengeIndex() {
                     <br />
                     More Form @{owner.username}
                   </>
+                )}
+                {data.played.includes(auth.currentUser.uid) ? (
+                  "ALREDY play this challenge"
+                ) : (
+                  <button onClick={() => router.push(`/Challenge/${cid}/play`)}>
+                    Play
+                  </button>
                 )}
               </>
             )}

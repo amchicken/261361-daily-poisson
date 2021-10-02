@@ -72,6 +72,7 @@ export default function Submitx() {
     if (index === data.length) {
       setFinished(true);
       updateScore();
+      router.push("/");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index]);
