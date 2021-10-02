@@ -29,12 +29,9 @@ export default function Leaderboard() {
     debounceFn(e.target.value);
   }
 
-  const [selected, setSelected] = useState("leaderboard");
-
   if (loading) return <div>Loading...</div>;
   return (
     <div className="container">
-      <Nav setSelected={setSelected} />
       <div style={{ backgroundColor: "white" }}>
         <input type="text" onChange={handleChange} />
         <div>
@@ -46,7 +43,6 @@ export default function Leaderboard() {
             </div>
           ))}
         </div>
-        <JSONPretty id="json-pretty" data={data} />
       </div>
       <div className="container__footer">DAILYPOISSON 2021 | SITE</div>
     </div>

@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import ImageUploader from "@components/ImageUploader";
 import Nav from "@components/Nav";
+import { CATEGORY, LEVEL } from "@lib/constants";
 
 export default function Create() {
   const router = useRouter();
@@ -23,26 +24,32 @@ export default function Create() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const createCollectionObject = {
-      ...values,
-      tags: tags,
-      thumbnail: imgURL,
-      createdBy: auth.currentUser.uid,
-      createdAt: serverTimestamp(),
-      play: 0,
-      played: [],
-    };
-    const ref = firestore.collection("challenges").doc();
-    const batch = firestore.batch();
+    let confirmation = true;
+    if (values.name === "")
+      confirmation = confirm("do you want create with blank name?");
 
-    batch.set(ref, createCollectionObject);
+    if (confirmation) {
+      const createCollectionObject = {
+        ...values,
+        tags: tags,
+        thumbnail: imgURL,
+        createdBy: auth.currentUser.uid,
+        createdAt: serverTimestamp(),
+        play: 0,
+        played: [],
+      };
+      const ref = firestore.collection("challenges").doc();
+      const batch = firestore.batch();
 
-    try {
-      await batch.commit();
-      toast.success(`Create ${values.name} successful`);
-      router.push(`/Challenge/${ref.id}/admin`);
-    } catch (err) {
-      toast.error(err);
+      batch.set(ref, createCollectionObject);
+
+      try {
+        await batch.commit();
+        toast.success(`Create ${values.name} successful`);
+        router.push(`/Challenge/${ref.id}/admin`);
+      } catch (err) {
+        toast.error(err);
+      }
     }
   };
 
@@ -74,24 +81,22 @@ export default function Create() {
                   setImgURL={setImgURL}
                 />
                 <div>
-                  <input
-                    autoComplete="off"
-                    type="text"
+                  <select
                     name="category"
                     value={values.category}
                     onChange={onChange}
-                    placeholder="Category"
-                  />
+                  >
+                    {CATEGORY().map((doc) => (
+                      <option key={doc}>{doc}</option>
+                    ))}
+                  </select>
                 </div>
                 <div>
-                  <input
-                    autoComplete="off"
-                    type="text"
-                    name="level"
-                    value={values.level}
-                    onChange={onChange}
-                    placeholder="Level"
-                  />
+                  <select name="level" value={values.level} onChange={onChange}>
+                    {LEVEL().map((doc) => (
+                      <option key={doc}>{doc}</option>
+                    ))}
+                  </select>
                 </div>
                 <span>Description</span>
                 <textarea
