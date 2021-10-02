@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "firebase": "^8.9.0",
+    "lodash": "^4.17.21",
     "next": "11.1.2",
     "react": "17.0.2",
     "react-device-detect": "^1.17.0",

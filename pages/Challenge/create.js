@@ -29,6 +29,8 @@ export default function Create() {
       thumbnail: imgURL,
       createdBy: auth.currentUser.uid,
       createdAt: serverTimestamp(),
+      play: 0,
+      played: [],
     };
     const ref = firestore.collection("challenges").doc();
     const batch = firestore.batch();
