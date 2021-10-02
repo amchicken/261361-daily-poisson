@@ -148,12 +148,12 @@ export default function Submitx() {
                   Question {index + 1} of {data.length} timeleft : {timer}
                 </div>
                 <div>{current.question}</div>
-                {/* <Image
+                <Image
                   src={current.imgURL || "/notfound.png"}
                   width={300}
                   height={300}
                   alt={current.question}
-                /> */}
+                />
                 <QustionList data={current.choices} setAnswer={setAnswer} />
               </>
             )

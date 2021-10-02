@@ -138,6 +138,7 @@ export default function ProfilePage() {
                         /// email
                         // onChange={onChange}
                         placeholder="email"
+                        value={user.email}
                         disabled
                       />
                       <button onClick={() => enableInput()}>EDIT</button>
@@ -149,6 +150,7 @@ export default function ProfilePage() {
                         name="username"
                         /// email
                         // onChange={onChange}
+                        value={user.username}
                         placeholder="username"
                         disabled
                       />
