@@ -70,6 +70,7 @@ export default function Leaderboard() {
   if (loading) return <div>Loading...</div>;
   return (
     <div className="container">
+      <Nav />
       <div style={{ backgroundColor: "white" }}>
         <input type="text" value={search} onChange={handleChange} />
         <button onClick={() => setSearch("")}>Clear seach</button>

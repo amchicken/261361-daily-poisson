@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { useState, useContext, useRef, useEffect } from "react";
 import { UserContext } from "@lib/UserContext";
 import { FaBars, FaSearch } from "react-icons/fa";
@@ -7,6 +8,8 @@ import { auth } from "@lib/firebase";
 
 export default function Nav({ selected, setSelected }) {
   const { user } = useContext(UserContext);
+  const router = useRouter();
+  const current = router.pathname.split("/")[1];
   const [showLogOut, setShowLogOut] = useState(false);
 
   return (
@@ -36,61 +39,64 @@ export default function Nav({ selected, setSelected }) {
         </div>
         <ul className="nav__float__list" onClick={() => setShowLogOut(false)}>
           <Link href="/" passHref>
-            <Image src="/img/logo.png" width="90" height="64" alt="logo" />
+            <Image
+              src="/img/logo.png"
+              width="90"
+              height="64"
+              alt="logo"
+              className="pointer"
+            />
           </Link>
 
           <li
-            onClick={() => setSelected("profile")}
             style={
-              selected == "profile" ? { color: "#48f36e" } : { color: "white" }
+              current == "profile" ? { color: "#48f36e" } : { color: "white" }
             }
           >
-            PROFILE
+            <Link href="/profile" passHref>
+              PROFILE
+            </Link>
+          </li>
+          <li style={current == "" ? { color: "#48f36e" } : { color: "white" }}>
+            <Link href="/" passHref>
+              DAILY CHALLENGES
+            </Link>
           </li>
           <li
-            onClick={() => setSelected("dailyChallenge")}
             style={
-              selected == "dailyChallenge"
+              current == "leaderboard"
                 ? { color: "#48f36e" }
                 : { color: "white" }
             }
           >
-            DAILY CHALLENGES
+            <Link href="/leaderboard" passHref>
+              LEADERBOARD
+            </Link>
           </li>
           <li
-            onClick={() => setSelected("leaderboard")}
             style={
-              selected == "leaderboard"
+              current == "repository"
                 ? { color: "#48f36e" }
                 : { color: "white" }
             }
           >
-            LEADERBOARD
+            <Link href="/" passHref>
+              REPOSITORY
+            </Link>
           </li>
-          <li
-            onClick={() => setSelected("repository")}
-            style={
-              selected == "repository"
-                ? { color: "#48f36e" }
-                : { color: "white" }
-            }
-          >
-            REPOSITORY
-          </li>
-          <li
+          {/* <li
             onClick={() => setSelected("privateSession")}
             style={
-              selected == "privateSession"
+              current == "privateSession"
                 ? { color: "#48f36e" }
                 : { color: "white" }
             }
           >
             PRIVATE SESSION
-          </li>
+          </li> */}
           <li
-            onClick={() => setSelected("search")}
             style={
-              selected == "search" ? { color: "#48f36e" } : { color: "white" }
+              current == "search" ? { color: "#48f36e" } : { color: "white" }
             }
           >
             <FaSearch />
