@@ -5,23 +5,61 @@ import Nav from "@components/Nav";
 import JSONPretty from "react-json-pretty";
 import Image from "next/image";
 import _ from "lodash";
+import toast from "react-hot-toast";
+
+const LIMIT = 5;
 
 export default function Leaderboard() {
-  const [data, dataLoading] = useCollectionDataOnce(
-    firestore.collection("usernames").orderBy("points", "desc").limit(3),
+  const [firestoreData, dataLoading] = useCollectionDataOnce(
+    firestore.collection("usernames").orderBy("points", "desc").limit(LIMIT),
     { idField: "id" }
   );
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
+  const [serchData, setSerchData] = useState([]);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     setLoading(dataLoading);
   }, [dataLoading]);
 
-  const debounceFn = useCallback(_.debounce(handleDB, 1000), []);
+  useEffect(() => {
+    if (firestoreData)
+      setData(
+        firestoreData.map((doc, index) => {
+          return { ...doc, index: index + 1 };
+        })
+      );
+  }, [firestoreData]);
 
-  function handleDB(input) {
-    console.log(input);
+  const debounceFn = useCallback(_.debounce(handleDB, 1000), [data]);
+
+  async function handleDB(input) {
+    setLoading(true);
+    let target = data.filter(
+      (doc, index) =>
+        doc.name.toLowerCase().split(" ").includes(input.toLowerCase()) ||
+        doc.username.toLowerCase().split(" ").includes(input.toLowerCase()) ===
+          input
+    );
+
+    if (target.length === 0) {
+      console.log("FIRESOTRE");
+      const ref = firestore
+        .collection("usernames")
+        .where("name", "==", input)
+        .where("username", "==", input);
+      target = (await ref.get()).docs.map((doc) => {
+        return { ...doc.data(), index: `${LIMIT}++` };
+      });
+    }
+
+    if (search === "" && target.length === 0) {
+      toast.error("NOT FOUND");
+    }
+
+    setLoading(false);
+    setSerchData(target);
   }
 
   function handleChange(e) {
@@ -33,15 +71,34 @@ export default function Leaderboard() {
   return (
     <div className="container">
       <div style={{ backgroundColor: "white" }}>
-        <input type="text" onChange={handleChange} />
+        <input type="text" value={search} onChange={handleChange} />
+        <button onClick={() => setSearch("")}>Clear seach</button>
         <div>
-          {data.map((doc, idx) => (
-            <div key={doc.id}>
-              <Image src={doc.photoURL} width={30} height={30} alt="photoURL" />
-              {idx + 1} {doc.username}
-              {doc.points}
-            </div>
-          ))}
+          {serchData.length > 0
+            ? serchData.map((doc) => (
+                <div key={doc.id}>
+                  <Image
+                    src={doc.photoURL}
+                    width={30}
+                    height={30}
+                    alt="photoURL"
+                  />
+                  #{doc.index} {doc.username}
+                  {doc.points}
+                </div>
+              ))
+            : data.map((doc) => (
+                <div key={doc.id}>
+                  <Image
+                    src={doc.photoURL}
+                    width={30}
+                    height={30}
+                    alt="photoURL"
+                  />
+                  #{doc.index} {doc.username}
+                  {doc.points}
+                </div>
+              ))}
         </div>
       </div>
       <div className="container__footer">DAILYPOISSON 2021 | SITE</div>
