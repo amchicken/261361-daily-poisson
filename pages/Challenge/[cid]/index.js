@@ -4,7 +4,7 @@ import { firestore, auth } from "@lib/firebase";
 import { useDocumentOnce } from "react-firebase-hooks/firestore";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { FaGooglePlay } from "react-icons/fa";
+import { FaGooglePlay, FaShareAlt } from "react-icons/fa";
 import { toast } from "react-hot-toast";
 
 export default function ChallengeIndex() {
@@ -42,13 +42,25 @@ export default function ChallengeIndex() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [loading]);
 
+    const copyToClipBoard = () => {
+        const el = document.createElement("input");
+        el.value = window.location.href;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand("copy");
+        document.body.removeChild(el);
+        toast("✔️ Successfully copy url to clipboard!");
+    };
+
     return (
-        <div>
+        <>
             <div
                 style={{
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
+                    width: "100vw",
+                    height: "100vh",
                 }}
             >
                 {loading
@@ -57,44 +69,72 @@ export default function ChallengeIndex() {
                     ? "NOT FOUND CHALLENGE"
                     : data && (
                           <div className="preview--card">
-                              <span>&#10006;</span>
+                              <span onClick={() => router.push(`/`)}>
+                                  &#10006;
+                              </span>
                               <div className="preview--card__header">
                                   {data.name}
                               </div>
                               <div className="preview--card__body">
                                   <div>About</div>
-                                  <div className="preview--card__body__left">
-                                      <div>
-                                          <h1>LEVEL</h1>
-                                          <span>{data.level}</span>
-                                          <span>500 POINTS</span>
-                                      </div>
-                                      <div>
-                                          <h1>ITEMS</h1>
-                                          <span>{data.question}</span>
-                                      </div>
-                                      <div>
-                                          <h1>CATEGORY</h1>
-                                          <span>{data.category}</span>
-                                      </div>
-                                      <section>
-                                          <h1>Description</h1>
-                                          <span>{data.description}</span>
-                                      </section>
-                                      <footer>
-                                          tags :{" "}
-                                          {data.tags.map((tag, idx) => (
-                                              <i key={idx}>{tag}</i>
-                                          ))}
-                                      </footer>
-                                  </div>
-                                  <div className="preview--card__body__right">
-                                      <section>
-                                          <header>The Creator</header>
+                                  <div>
+                                      <div className="left">
                                           <div>
-                                              {owner && (
-                                                  <>
-                                                      <div>
+                                              <div>
+                                                  <h1>LEVEL</h1>
+                                                  <span>
+                                                      {data.level.toUpperCase()}
+                                                  </span>
+                                                  <span>500 POINTS</span>
+                                              </div>
+                                              <div>
+                                                  <h1>ITEMS</h1>
+                                                  <span>{data.question}</span>
+                                              </div>
+                                              <div>
+                                                  <h1>CATEGORY</h1>
+                                                  <span
+                                                      style={{
+                                                          color: "#FF5555",
+                                                          fontWeight: "600",
+                                                      }}
+                                                  >
+                                                      {data.category.toUpperCase()}
+                                                  </span>
+                                              </div>
+                                          </div>
+
+                                          <section>
+                                              <h1>Description</h1>
+                                              <div>
+                                                  <span>
+                                                      {data.description}
+                                                  </span>
+                                              </div>
+                                          </section>
+                                          <footer>
+                                              <i
+                                                  onClick={() =>
+                                                      copyToClipBoard()
+                                                  }
+                                              >
+                                                  <FaShareAlt />
+                                              </i>
+                                              <div>
+                                                  {data.tags.map((tag, idx) => (
+                                                      <span key={idx}>
+                                                          {tag}
+                                                      </span>
+                                                  ))}
+                                              </div>
+                                          </footer>
+                                      </div>
+                                      <div className="right">
+                                          <section>
+                                              <header>The Creator</header>
+                                              <div>
+                                                  {owner && (
+                                                      <>
                                                           <Image
                                                               src={
                                                                   owner.photoURL ||
@@ -108,43 +148,49 @@ export default function ChallengeIndex() {
                                                               @{owner.username}
                                                           </h1>
                                                           <h3>
-                                                              Publisthed Date
+                                                              Published Date{" "}
                                                               {data.createdAt
                                                                   ?.toDate()
-                                                                  .toJSON()}
+                                                                  .toLocaleDateString()}
                                                           </h3>
-                                                      </div>
-                                                      <div>
-                                                          More From @
-                                                          {owner.username}
-                                                      </div>
-                                                  </>
-                                              )}
-                                          </div>
+                                                      </>
+                                                  )}
+                                              </div>
+                                          </section>
                                           <footer>
+                                              {owner && (
+                                                  <div>
+                                                      More From @
+                                                      {owner.username}
+                                                  </div>
+                                              )}
                                               {data.played.includes(
                                                   auth.currentUser.uid
                                               ) ? (
                                                   "Already play this challenge"
                                               ) : (
-                                                  <button
-                                                      onClick={() =>
-                                                          router.push(
-                                                              `/Challenge/${cid}/play`
-                                                          )
-                                                      }
-                                                  >
-                                                      <FaGooglePlay />
-                                                  </button>
+                                                  <span>
+                                                      <Image
+                                                          onClick={() =>
+                                                              router.push(
+                                                                  `/Challenge/${cid}/play`
+                                                              )
+                                                          }
+                                                          src="/submitBTN.png"
+                                                          width={100}
+                                                          height={100}
+                                                          alt="button"
+                                                      />
+                                                  </span>
                                               )}
                                           </footer>
-                                      </section>
+                                      </div>
                                   </div>
                               </div>
                           </div>
                       )}
             </div>
             <div className="container__footer">DAILYPOISSON 2021 | SITE</div>
-        </div>
+        </>
     );
 }
