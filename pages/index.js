@@ -26,7 +26,7 @@ export default function Home() {
                             <div className="container__right__content">
                                 {snapshot.map((doc) => (
                                     <Link
-                                        href={`challenge/${doc.id}`}
+                                        href={`Challenge/${doc.id}`}
                                         passHref
                                         key={doc.id}
                                     >
@@ -43,13 +43,14 @@ export default function Home() {
                                                     alt="thumbnail"
                                                 />
                                                 <div>
-                                                    <p>
-                                                        {doc.level.toUpperCase()}
-                                                    </p>
+                                                    <p>{doc.name}</p>
                                                     <h4>
                                                         {doc.question} Items
                                                     </h4>
                                                     <span>{doc.category}</span>
+                                                    <h4>
+                                                        {doc.level.toUpperCase()}
+                                                    </h4>
                                                 </div>
                                             </div>
                                             <div className="container__right__content__card__float">

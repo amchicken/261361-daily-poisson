@@ -70,7 +70,7 @@
                 &__left {
                     display: grid;
                     grid-template-columns: 100%;
-                    grid-template-rows: 15% 15% 15% 15% 40%;
+                    grid-template-rows: 15% 15% 15% 10% 40%;
                     div {
                         display: flex;
                         justify-content: center;
@@ -88,18 +88,34 @@
                             font-weight: 200;
                             color: white;
                         }
-                        input[name="category"] {
-                            color: #ff5555;
-                        }
-                        input[name="category"]::placeholder,
-                        :-webkit-input-placeholder,
-                        :-ms-input-placeholder {
-                            color: #ff5555;
+                        label {
+                            font-size: 1.2rem;
                         }
                         input::placeholder,
                         input::-webkit-input-placeholder,
                         :-ms-input-placeholder {
                             color: white;
+                        }
+                        select {
+                            display: block;
+                            background: transparent;
+                            outline: none;
+                            border: 1px solid #fb25ff;
+                            color: white;
+                            padding-left: 0.4rem;
+                            width: 100%;
+                            height: 2rem;
+                            font-size: 1.2rem;
+                            option {
+                                background-color: rgba(#121162, 1);
+                                border: 1px solid #fb25ff;
+                            }
+                        }
+                    }
+                    div:nth-of-type(2) {
+                        select {
+                            color: #ff5555;
+                            font-weight: bold;
                         }
                     }
                     .imageUploader {
@@ -122,6 +138,7 @@
                         font-weight: 300;
                         font-size: 1.2rem;
                         border-bottom: 2px solid rgba(#fb25ff, 0.5);
+                        height: auto;
                     }
                     textarea {
                         margin: 1rem;
@@ -130,6 +147,7 @@
                         border: none;
                         outline: none;
                         color: white;
+                        font-size: 1.1rem;
                     }
                     textarea::placeholder,
                     textarea::-webkit-input-placeholder,
