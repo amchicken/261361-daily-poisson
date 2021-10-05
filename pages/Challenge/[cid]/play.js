@@ -101,8 +101,13 @@ export default function Submitx() {
       if (typeof challengeDetail.played !== "undefined")
         batch.update(challengeRef, {
           played: arrayUnion(auth.currentUser.uid),
+          play: Increment(1),
         });
-      else batch.update(challengeRef, { played: [auth.currentUser.uid] });
+      else
+        batch.update(challengeRef, {
+          played: [auth.currentUser.uid],
+          play: Increment(1),
+        });
 
       batch.update(userRef, {
         points: Increment(score),

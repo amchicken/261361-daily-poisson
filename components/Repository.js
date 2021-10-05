@@ -2,8 +2,9 @@ import { firestore, auth } from "@lib/firebase";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { get } from "lodash";
 
-const LIMIT = 3;
+const LIMIT = 6;
 
 export default function Repository({ sort = "date" }) {
   const [data, setData] = useState([]);
@@ -16,6 +17,8 @@ export default function Repository({ sort = "date" }) {
   const getData = async (next = true) => {
     setLoading(true);
     const ref = firestore.collection("challenges");
+
+    console.log(sort);
     let query;
 
     if (firstDocment || lastDocment) {
@@ -28,7 +31,7 @@ export default function Repository({ sort = "date" }) {
         } else {
           query = ref
             .orderBy("play", "desc")
-            .startAfter(lastDocment.createdAt)
+            .startAfter(lastDocment.play)
             .limit(LIMIT);
         }
       } else {
@@ -40,16 +43,15 @@ export default function Repository({ sort = "date" }) {
         } else {
           query = ref
             .orderBy("play", "asc")
-            .startAfter(firstDocment.createdAt)
+            .startAfter(firstDocment.play)
             .limit(LIMIT);
         }
       }
     } else {
-      query = ref.orderBy("createdAt", "desc").limit(LIMIT);
+      if (sort === "date")
+        query = ref.orderBy("createdAt", "desc").limit(LIMIT);
+      else query = ref.orderBy("play", "desc").limit(LIMIT);
     }
-
-    console.log(query);
-
     const firestoreData = (await query.get()).docs.map((doc) => {
       return { ...doc.data(), id: doc.id };
     });
@@ -78,18 +80,16 @@ export default function Repository({ sort = "date" }) {
 
   useEffect(() => {
     getData();
+
     return () => {
+      console.log("RETURN" + sort);
+      setFirst();
+      setLast();
+      setFirstDocment();
+      setLastDocment();
       setData([]);
-      console.log("DESTROY");
     };
   }, []);
-
-  useEffect(() => {
-    setFirst(undefined);
-    setLast(undefined);
-    getData();
-    console.log(first, last);
-  }, [sort]);
 
   return loading ? (
     <div>Loding. ...</div>
@@ -127,20 +127,25 @@ export default function Repository({ sort = "date" }) {
           </Link>
         </React.Fragment>
       ))}
-      {firstDocment.id === first?.id ? (
-        <></>
-      ) : (
-        <button style={{ position: "absolute" }} onClick={() => getData(false)}>
-          back
-        </button>
-      )}
-      {lastDocment.id === last?.id ? null : (
-        <button
-          style={{ position: "absolute", transform: "translateX(+50px)" }}
-          onClick={() => getData(true)}
-        >
-          NEXT
-        </button>
+      {!loading && (
+        <>
+          {firstDocment?.id === first?.id ? null : (
+            <button
+              style={{ position: "absolute" }}
+              onClick={() => getData(false)}
+            >
+              back
+            </button>
+          )}
+          {lastDocment?.id === last?.id ? null : (
+            <button
+              style={{ position: "absolute", transform: "translateX(+50px)" }}
+              onClick={() => getData(true)}
+            >
+              NEXT
+            </button>
+          )}
+        </>
       )}
     </>
   );

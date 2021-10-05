@@ -33,10 +33,11 @@ export default function Home() {
               </div>
             </div>
             <div className="container__right__content">
-              {subMenu === "home" ? <Repository /> : <Repository sort="play" />}
+              {subMenu === "home" ? <Repository /> : null}
+              {subMenu === "topplay" ? <Repository sort="play" /> : null}
             </div>
             <div className="container__right__footer">
-              <Link href="/Challenge/create" passHref>
+              <Link href="/challenge/create" passHref>
                 <button>REQUEST YOUR {"Q&A"}</button>
               </Link>
             </div>
