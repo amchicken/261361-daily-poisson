@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-const LIMIT = 6;
+const LIMIT = 3;
 
 export default function Repository({ sort = "date" }) {
   const [data, setData] = useState([]);
@@ -45,11 +45,7 @@ export default function Repository({ sort = "date" }) {
         }
       }
     } else {
-      if (sort === "date") {
-        query = ref.orderBy("createdAt", "desc").limit(LIMIT);
-      } else {
-        query = ref.orderBy("play", "asc").limit(LIMIT);
-      }
+      query = ref.orderBy("createdAt", "desc").limit(LIMIT);
     }
 
     console.log(query);
@@ -131,13 +127,18 @@ export default function Repository({ sort = "date" }) {
           </Link>
         </React.Fragment>
       ))}
-      {firstDocment.id === first?.id ? null : (
+      {firstDocment.id === first?.id ? (
+        <></>
+      ) : (
         <button style={{ position: "absolute" }} onClick={() => getData(false)}>
           back
         </button>
       )}
       {lastDocment.id === last?.id ? null : (
-        <button style={{ position: "absolute" }} onClick={() => getData(true)}>
+        <button
+          style={{ position: "absolute", transform: "translateX(+50px)" }}
+          onClick={() => getData(true)}
+        >
           NEXT
         </button>
       )}
