@@ -13,7 +13,6 @@ import Swal from "sweetalert2";
 const CHOICES = 4;
 const initData = {
   question: "",
-  level: "Easy",
   time: 5,
   correct: "",
   choices: ["", "", "", ""],
@@ -65,7 +64,8 @@ export default function AddQuestionToChallenge() {
     e.preventDefault();
 
     const ref = firestore.collection("challenges").doc(cid);
-    const mod = { ...values };
+    const challengeData = (await ref.get()).data();
+    const mod = { ...values, level: challengeData.level };
     delete mod.id;
 
     const batch = firestore.batch();
