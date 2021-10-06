@@ -26,10 +26,8 @@ export default function ProfilePage() {
             .collection("history")
             .orderBy("createdAt", "desc"),
 
-        { idField: "id" }
-    );
 
-    console.log(history);
+  const [left, setLeft] = useState(true);
 
     const [left, setLeft] = useState(true);
 

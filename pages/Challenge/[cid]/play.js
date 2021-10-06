@@ -100,7 +100,6 @@ export default function Submitx() {
     const challengeRef = firestore.collection("challenges").doc(cid);
 
     if (challengeDetail.played.includes(auth.currentUser.uid)) {
-      console.log("ALRE PLAY");
     } else {
       if (typeof challengeDetail.played !== "undefined")
         batch.update(challengeRef, {

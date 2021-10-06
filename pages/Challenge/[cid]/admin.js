@@ -4,7 +4,10 @@ import ImageUploader from "@components/ImageUploader";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { firestore, Increment, auth } from "@lib/firebase";
-import { useCollectionDataOnce } from "react-firebase-hooks/firestore";
+import {
+  useCollectionDataOnce,
+  useDocumentDataOnce,
+} from "react-firebase-hooks/firestore";
 import { FiClock } from "react-icons/fi";
 import toast from "react-hot-toast";
 import JSONPretty from "react-json-pretty";
@@ -34,6 +37,10 @@ export default function AddQuestionToChallenge() {
     .collection("challenges")
     .doc(cid)
     .collection("questions");
+
+  const [challeng] = useDocumentDataOnce(
+    firestore.collection("challenges").doc(cid)
+  );
 
   const [questionObject, loading] = useCollectionDataOnce(ref, {
     idField: "id",
@@ -115,14 +122,7 @@ export default function AddQuestionToChallenge() {
       <div className="container4__inside">
         <div className="container4__inside__header">
           <div></div>
-          <input
-            autoComplete="off"
-            type="text"
-            name="name"
-            value={values.name}
-            onChange={onChange}
-            placeholder="Name This Challenge"
-          />
+          {challeng && challeng.name}
           <p onClick={goBack}>&#10006;</p>
         </div>
         <div className="container4__inside__content">

@@ -60,19 +60,50 @@ export default function MyRepository({ sort = "date" }) {
     useEffect(() => {
         getData();
 
-        return () => {
-            console.log("RETURN" + sort);
-            setFirst();
-            setLast();
-            setFirstDocment();
-            setLastDocment();
-            setData([]);
-        };
-    }, []);
 
-    return loading ? (
-        <div>Loding. ...</div>
-    ) : (
+    return () => {
+      setFirst();
+      setLast();
+      setFirstDocment();
+      setLastDocment();
+      setData([]);
+    };
+  }, []);
+
+  return loading ? (
+    <div>Loding. ...</div>
+  ) : (
+    <>
+      {data.map((doc) => (
+        <React.Fragment key={doc.id}>
+          <div className="container__right__content__card">
+            <div className="container__right__content__card__show">
+              <Image
+                src={doc.thumbnail || "/notfound.png"}
+                width={100}
+                height={100}
+                quality={100}
+                alt="thumbnail"
+              />
+              <div>
+                <p>{doc.name}</p>
+                <h4>{doc.question} Items</h4>
+                <span>{doc.category}</span>
+                <h4>{doc.level.toUpperCase()}</h4>
+              </div>
+            </div>
+            <div className="container__right__content__card__float">
+              <div>
+                <Link href={`/challenge/${doc.id}/general`} passHref>
+                  Edit
+                </Link>
+              </div>
+            </div>
+          </div>
+        </React.Fragment>
+      ))}
+      {!loading && (
+
         <>
             {data.map((doc) => (
                 <React.Fragment key={doc.id}>

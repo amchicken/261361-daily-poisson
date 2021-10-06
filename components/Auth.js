@@ -38,19 +38,37 @@ export function LoginRegister() {
       toast.error("password is confirm not match");
       return;
     }
+
+    if (values.username === "") {
+      toast.error("username cant be null");
+      return;
+    }
+
+    if (values.password === "") {
+      toast.error("password cant be null");
+      return;
+    }
+
+    if (values.email === "") {
+      toast.error("email cant be null");
+      return;
+    }
+
     await auth
       .createUserWithEmailAndPassword(values.email, values.password)
       .then(() => {
-        auth.currentUser.updateProfile({
-          displayName: values.username,
-        });
         const batch = firestore.batch();
-        batch.update(
-          firestore.collection("usernames").doc(auth.currentUser.uid),
-          {
-            username: values.username,
-          }
-        );
+        batch.set(firestore.collection("usernames").doc(auth.currentUser.uid), {
+          name: values.username,
+          username: values.username,
+          email: values.email,
+          photoURL: null,
+          bio: "",
+          dayStreak: 0,
+          accepted: 0,
+          points: 0,
+          rewards: 0,
+        });
         batch.commit();
       })
       .catch((err) => toast.error(err));
@@ -152,7 +170,6 @@ export function LoginRegister() {
                   <div>
                     <button
                       onClick={async () => {
-                        console.log("H");
                         await auth.signInWithRedirect(facebookProvider);
                       }}
                     >
