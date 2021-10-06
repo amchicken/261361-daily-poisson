@@ -1,0 +1,105 @@
+.App {
+    width: 100vw;
+    height: 100vh;
+    padding: 2rem;
+    .playCard {
+        position: relative;
+        background: rgba($color--blue, 0.3);
+        & > span {
+            position: absolute;
+            top: 0 rem;
+            right: 1rem;
+            color: rgba($color--primary, 0.8);
+            font-size: 3rem;
+            cursor: pointer;
+        }
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-rows: 10% 90%;
+        &__header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            color: white;
+            border-bottom: 1px solid rgba($color--primary, 0.8);
+            font-family: $font-oswald;
+            font-weight: 100;
+        }
+        &__body {
+            display: grid;
+            grid-template-rows: 40% 30% 30%;
+            .question--list {
+                padding: 2rem 20rem;
+                display: grid;
+                grid-template-rows: 30% 70%;
+                grid-row-gap: 1rem;
+                & > div {
+                    color: white;
+                    font-size: 1rem;
+                    text-align: center;
+                }
+                & > span {
+                    border: 1px solid rgba($color--primary, 0.5);
+                    background: rgba(black, 0.3);
+                    color: white;
+                    padding: 1rem 3rem;
+                    font-size: 1.5rem;
+                    text-align: center;
+                }
+            }
+            .question--image {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            .question--choice {
+                display: grid;
+                grid-template-rows: 1fr 1fr;
+                grid-template-columns: 1fr 1fr;
+                grid-row-gap: 1.5rem;
+                padding: 2rem 26rem;
+                & > div {
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    & > div {
+                        border: 1px solid rgba($color--blue, 0.5);
+                        background: rgba(black, 0.3);
+                        color: white;
+                        font-size: 1.4rem;
+                        text-align: center;
+                        padding: 0.8rem 10rem;
+                        border-radius: 2rem;
+                        cursor: pointer;
+                    }
+                }
+            }
+            .question--finish {
+                margin-top: 6rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                color: $color--secondary;
+                font-family: $font-oswald;
+                & > div {
+                    position: relative;
+                    width: 17rem;
+                    height: 20rem;
+                }
+                h1,
+                h2,
+                h3,
+                h4 {
+                    padding: 0.7rem;
+                }
+            }
+        }
+    }
+}
