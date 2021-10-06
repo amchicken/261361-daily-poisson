@@ -8,6 +8,7 @@ import { AiOutlineCloseCircle } from "react-icons/ai";
 import ImageUploader from "@components/ImageUploader";
 import Nav from "@components/Nav";
 import { CATEGORY, LEVEL } from "@lib/constants";
+import Swal from "sweetalert2";
 
 export default function Create() {
     const router = useRouter();
@@ -24,33 +25,36 @@ export default function Create() {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        let confirmation = true;
-        if (values.name === "")
-            confirmation = confirm("do you want create with blank name?");
+        Swal.fire({
+            title: "Want to continue?",
+            text: "Please verify the information",
+            showDenyButton: true,
+            confirmButtonText: "Yes",
+            confirmButtonColor: "#56a33e",
+            preConfirm: async () => {
+                const createCollectionObject = {
+                    ...values,
+                    tags: tags,
+                    thumbnail: imgURL,
+                    createdBy: auth.currentUser.uid,
+                    createdAt: serverTimestamp(),
+                    play: 0,
+                    played: [],
+                };
+                const ref = firestore.collection("challenges").doc();
+                const batch = firestore.batch();
 
-        if (confirmation) {
-            const createCollectionObject = {
-                ...values,
-                tags: tags,
-                thumbnail: imgURL,
-                createdBy: auth.currentUser.uid,
-                createdAt: serverTimestamp(),
-                play: 0,
-                played: [],
-            };
-            const ref = firestore.collection("challenges").doc();
-            const batch = firestore.batch();
+                batch.set(ref, createCollectionObject);
 
-            batch.set(ref, createCollectionObject);
-
-            try {
-                await batch.commit();
-                toast.success(`Create ${values.name} successful`);
-                router.push(`/Challenge/${ref.id}/admin`);
-            } catch (err) {
-                toast.error(err);
-            }
-        }
+                try {
+                    await batch.commit();
+                    toast.success(`Create ${values.name} successful`);
+                    router.push(`/Challenge/${ref.id}/admin`);
+                } catch (err) {
+                    toast.error(err);
+                }
+            },
+        });
     };
 
     const goBack = () => {
