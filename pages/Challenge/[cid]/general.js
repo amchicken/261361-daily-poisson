@@ -1,4 +1,4 @@
-import { firestore, auth } from "@lib/firebase";
+import { firestore } from "@lib/firebase";
 import { useRouter } from "next/router";
 import { useForm } from "@lib/useForm";
 import { useState, useEffect } from "react";
@@ -10,7 +10,7 @@ import { toast } from "react-hot-toast";
 export default function General() {
   const router = useRouter();
   const { cid } = router.query;
-
+  const [auth, setAuth] = useState();
   const [data, loading] = useDocumentDataOnce(
     firestore.collection("challenges").doc(cid)
   );
@@ -25,11 +25,19 @@ export default function General() {
   );
 
   useEffect(() => {
-    console.log(values);
-  }, [values]);
+    const getCreator = async () => {
+      setAuth(
+        (
+          await firestore.collection("usernames").doc(data.createdBy).get()
+        ).data()
+      );
+    };
+    if (!loading) {
+      setForm(data);
 
-  useEffect(() => {
-    if (!loading) setForm(data);
+      getCreator();
+      console.log(auth);
+    }
   }, [loading]);
 
   const onSubmit = async (e) => {
@@ -116,15 +124,15 @@ export default function General() {
                     height="150"
                     width="150"
                     alt="profilepic"
-                    src={auth.currentUser.photoURL || "/notfound.png"}
+                    src={(auth && auth.photoURL) || "/notfound.png"}
                   />
-                  <div>{auth.currentUser.displayName}</div>
+                  <div>{auth && auth.name}</div>
                   <div>
                     publish date {new Date().toISOString().split("T")[0]}
                   </div>
                 </div>
                 <div className="container2__inside__content__2__right__bottom">
-                  More from {auth.currentUser.displayName}
+                  More from {auth && auth.username}
                 </div>
               </div>
             </div>
