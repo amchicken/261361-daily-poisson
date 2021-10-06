@@ -2,11 +2,10 @@ import { firestore, auth } from "@lib/firebase";
 import { useRouter } from "next/router";
 import { useForm } from "@lib/useForm";
 import { useState, useEffect } from "react";
-import ImageUploader from "@components/ImageUploader";
-import { CATEGORY, LEVEL } from "@lib/constants";
 import Image from "next/image";
 import { useDocumentDataOnce } from "react-firebase-hooks/firestore";
-import { AiOutlineCloseCircle } from "react-icons/ai";
+import Swal from "sweetalert2";
+import { toast } from "react-hot-toast";
 
 export default function General() {
   const router = useRouter();
@@ -33,9 +32,6 @@ export default function General() {
     if (!loading) setForm(data);
   }, [loading]);
 
-  const [tags, setTags] = useState([]);
-  const [imgURL, setImgURL] = useState(null);
-
   const onSubmit = async (e) => {
     e.preventDefault();
     Swal.fire({
@@ -49,17 +45,16 @@ export default function General() {
           toast.error("Please fill in the blanks");
           return;
         }
-        const ref = firestore.collection("challenges").doc();
+        const ref = firestore.collection("challenges").doc(cid);
         const batch = firestore.batch();
 
-        batch.upadate(ref, {
+        batch.update(ref, {
           name: values.name,
           description: values.description,
         });
 
         try {
           await batch.commit();
-          toast.success(`Create ${values.name} successful`);
           router.push(`/Challenge/${ref.id}/admin`);
         } catch (err) {
           toast.error(err);
@@ -135,7 +130,7 @@ export default function General() {
             </div>
           </div>
           <div className="container2__inside__footer">
-            <TagsGroup tags={values.tags} setTags={setTags} />
+            <TagsGroup tags={values.tags} />
             <button onClick={onSubmit}>Save changes {">>"}</button>
           </div>
         </div>
@@ -144,7 +139,7 @@ export default function General() {
   );
 }
 
-const TagsGroup = ({ tags, setTags }) => {
+const TagsGroup = ({ tags }) => {
   return (
     <div>
       <Image src="/img/tag.png" width="30" height="30" alt="" />
