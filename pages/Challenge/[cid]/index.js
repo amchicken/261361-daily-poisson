@@ -146,7 +146,7 @@ export default function ChallengeIndex() {
                           <span>
                             <Image
                               onClick={() =>
-                                router.push(`/challenge/${cid}/play`)
+                                router.push(`/Challenge/${cid}/play`)
                               }
                               src="/submitBTN.png"
                               width={100}
