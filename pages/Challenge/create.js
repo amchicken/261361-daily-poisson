@@ -88,6 +88,9 @@ export default function Create() {
                                         value={values.category}
                                         onChange={onChange}
                                     >
+                                        <option value="" disabled selected>
+                                            Select Category
+                                        </option>
                                         {CATEGORY().map((doc) => (
                                             <option key={doc}>{doc}</option>
                                         ))}
@@ -99,6 +102,9 @@ export default function Create() {
                                         value={values.level}
                                         onChange={onChange}
                                     >
+                                        <option value="" disabled selected>
+                                            Select Level
+                                        </option>
                                         {LEVEL().map((doc) => (
                                             <option key={doc}>{doc}</option>
                                         ))}
