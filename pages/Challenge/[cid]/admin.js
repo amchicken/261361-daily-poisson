@@ -8,6 +8,7 @@ import { useCollectionDataOnce } from "react-firebase-hooks/firestore";
 import { FiClock } from "react-icons/fi";
 import toast from "react-hot-toast";
 import JSONPretty from "react-json-pretty";
+import Swal from "sweetalert2";
 
 const CHOICES = 4;
 const initData = {
@@ -98,7 +99,16 @@ export default function AddQuestionToChallenge() {
     };
 
     const goBack = () => {
-        router.push("/");
+        Swal.fire({
+            title: "Are you sure?",
+            text: "Please verify the content",
+            showDenyButton: true,
+            confirmButtonText: "Yes",
+            confirmButtonColor: "#56a33e",
+            preConfirm: async () => {
+                router.push("/");
+            },
+        });
     };
 
     return (
