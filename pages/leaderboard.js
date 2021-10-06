@@ -7,7 +7,7 @@ import Image from "next/image";
 import _ from "lodash";
 import toast from "react-hot-toast";
 
-const LIMIT = 10;
+const LIMIT = 7;
 
 export default function Leaderboard() {
     const [firestoreData, dataLoading] = useCollectionDataOnce(
@@ -39,7 +39,7 @@ export default function Leaderboard() {
 
     async function handleDB(input) {
         setLoading(true);
-        let target = data.filter(
+        let target = data?.filter(
             (doc, index) =>
                 doc.name
                     .toLowerCase()
@@ -51,18 +51,18 @@ export default function Leaderboard() {
                     .includes(input.toLowerCase()) === input
         );
 
-        if (target.length === 0) {
+        if (target?.length === 0) {
             console.log("FIRESOTRE");
             const ref = firestore
                 .collection("usernames")
                 .where("name", "==", input)
                 .where("username", "==", input);
-            target = (await ref.get()).docs.map((doc) => {
+            target = (await ref?.get()).docs?.map((doc) => {
                 return { ...doc.data(), index: `${LIMIT}++` };
             });
         }
 
-        if (search === "" && target.length === 0) {
+        if (search === "" && target?.length === 0) {
             toast.error("NOT FOUND");
         }
 
@@ -102,8 +102,8 @@ export default function Leaderboard() {
                             <div></div>
                             <div>P O I N T S</div>
                         </div>
-                        {serchData.length > 0
-                            ? serchData.map((doc) => (
+                        {serchData?.length > 0
+                            ? serchData?.map((doc) => (
                                   <div key={doc.id}>
                                       <div>#{doc.index}</div>
                                       <div>
@@ -118,7 +118,7 @@ export default function Leaderboard() {
                                       <div>{doc.points}</div>
                                   </div>
                               ))
-                            : data.map((doc) => (
+                            : data?.map((doc) => (
                                   <div key={doc.id}>
                                       <div>#{doc.index}</div>
                                       <div>
