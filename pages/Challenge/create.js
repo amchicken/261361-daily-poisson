@@ -32,6 +32,14 @@ export default function Create() {
             confirmButtonText: "Yes",
             confirmButtonColor: "#56a33e",
             preConfirm: async () => {
+                if (
+                    values.name === "" ||
+                    values.category === "" ||
+                    values.level === ""
+                ) {
+                    toast.error("Please fill in the blanks");
+                    return;
+                }
                 const createCollectionObject = {
                     ...values,
                     tags: tags,
