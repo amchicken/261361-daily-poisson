@@ -57,7 +57,7 @@ export default function Create() {
         try {
           await batch.commit();
           toast.success(`Create ${values.name} successful`);
-          router.push(`/challenge/${ref.id}/admin`);
+          router.push(`/Challenge/${ref.id}/admin`);
         } catch (err) {
           toast.error(err);
         }

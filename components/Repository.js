@@ -130,7 +130,7 @@ export default function Repository({ sort = "date" }) {
               ) : (
                 <div>
                   <AiFillPlayCircle
-                    onClick={() => router.push(`challenge/${doc.id}`)}
+                    onClick={() => router.push(`Challenge/${doc.id}`)}
                   />
                 </div>
               )}

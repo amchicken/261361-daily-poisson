@@ -33,7 +33,7 @@ export default function Home() {
               {subMenu === "topplay" ? <Repository sort="play" /> : null}
             </div>
             <div className="container__right__footer">
-              <Link href="/challenge/create" passHref>
+              <Link href="/Challenge/create" passHref>
                 <button>CREATE YOUR CHALLENGE</button>
               </Link>
             </div>
