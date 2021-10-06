@@ -48,6 +48,7 @@ export default function Create() {
           createdAt: serverTimestamp(),
           play: 0,
           played: [],
+          show: false,
         };
         const ref = firestore.collection("challenges").doc();
         const batch = firestore.batch();

@@ -21,7 +21,7 @@ export default function Repository({ sort = "date" }) {
 
   const getData = async (next = true) => {
     setLoading(true);
-    const ref = firestore.collection("challenges");
+    const ref = firestore.collection("challenges").where("show", "==", true);
 
     let query;
 

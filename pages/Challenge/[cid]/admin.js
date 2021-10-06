@@ -97,12 +97,15 @@ export default function AddQuestionToChallenge() {
   const goBack = () => {
     Swal.fire({
       title: "Are you sure?",
-      text: "Please verify the content",
+      text: "save and publish challenges",
       showDenyButton: true,
       confirmButtonText: "Yes",
       confirmButtonColor: "#56a33e",
       preConfirm: async () => {
-        router.push("/");
+        const batch = firestore.batch();
+        const ref = firestore.collection("challenges").doc(cid);
+        batch.update(ref, { show: true });
+        batch.commit().then(() => router.push("/"));
       },
     });
   };
