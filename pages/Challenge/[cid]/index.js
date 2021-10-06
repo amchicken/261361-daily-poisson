@@ -11,7 +11,6 @@ import { POINTS } from "@lib/constants";
 export default function ChallengeIndex() {
   const router = useRouter();
   const { cid } = router.query;
-
   const [data, setData] = useState();
   const [notFound, setNotFound] = useState(false);
   const [doc, loading] = useDocumentOnce(

@@ -27,10 +27,6 @@ export default function Home() {
               >
                 TOP PLAY
               </span>
-              <div>
-                LOAD NEW CHALLENGES{"  "}
-                <IoReload style={{ color: "#48f36e" }} />
-              </div>
             </div>
             <div className="container__right__content">
               {subMenu === "home" ? <Repository /> : null}
