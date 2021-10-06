@@ -10,11 +10,11 @@
     &__left {
         display: grid;
         grid-template-columns: 100%;
-        grid-template-rows: 25% 75%;
+        grid-template-rows: 35% 65%;
         &__header {
             display: grid;
             grid-template-columns: 100%;
-            grid-template-rows: 40% 60%;
+            grid-template-rows: 17% 83%;
             div {
                 display: flex;
                 flex-direction: column;
@@ -28,31 +28,36 @@
                     font-weight: 200;
                 }
             }
-            box {
-                border: 1px solid rgba(#034393, 0.5);
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                textarea {
-                    white-space: normal;
-                    text-align: justify;
-                    text-align-last: center;
-                    background: none;
-                    outline: none;
-                    border: none;
-                    box-shadow: none;
-                    color: white;
-                    width: 30%;
+            & > span {
+                border: 1px solid rgba(#034393, 0.7);
+                border-radius: 2rem;
+                overflow-y: scroll;
+                display: grid;
+                grid-template-rows: auto;
+                padding: 0.5rem 5rem;
+                & > div {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    grid-template-rows: 1fr;
                     height: 100%;
-                    resize: none;
-                    overflow: hidden;
-                    padding: 1rem;
-                    font-size: 1rem;
-                    font-weight: 300;
+                    & > span {
+                        font-size: 2rem;
+                        font-family: $font-oswald;
+                        font-weight: 600;
+                        padding: 1rem;
+                    }
                 }
-                textarea::placeholder {
-                    color: white;
-                    line-height: 6rem;
+                & > div:first-of-type {
+                    border-bottom: 1px solid rgba(white, 0.5);
+                }
+                &::-webkit-scrollbar {
+                    width: 1rem;
+                }
+                &::-webkit-scrollbar-track {
+                    background: rgba(#ffffff, 0.1);
+                }
+                &::-webkit-scrollbar-thumb {
+                    background: rgba(#fb25ff, 1);
                 }
             }
         }
@@ -95,7 +100,7 @@
                     border-radius: 4rem;
                     background: rgba(#0f1d32, 0.5);
                     div {
-                        font-size: 4rem;
+                        font-size: 5.5rem;
                         font-weight: 1000;
                     }
                     span {
