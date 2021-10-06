@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { FaGooglePlay, FaShareAlt } from "react-icons/fa";
 import { toast } from "react-hot-toast";
+import { POINTS } from "@lib/constants";
 
 export default function ChallengeIndex() {
   const router = useRouter();
@@ -79,7 +80,9 @@ export default function ChallengeIndex() {
                         <div>
                           <h1>LEVEL</h1>
                           <span>{data.level.toUpperCase()}</span>
-                          <span>500 POINTS</span>
+                          <span>
+                            {POINTS(data.level) * data.question} POINTS
+                          </span>
                         </div>
                         <div>
                           <h1>ITEMS</h1>

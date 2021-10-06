@@ -80,7 +80,7 @@ export default function Nav({ selected, setSelected }) {
                 : { color: "white" }
             }
           >
-            <Link href="/" passHref>
+            <Link href="/repository" passHref>
               REPOSITORY
             </Link>
           </li>

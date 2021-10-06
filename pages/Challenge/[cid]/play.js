@@ -201,7 +201,7 @@ export default function Submitx() {
                   <div>
                     <Image src="/trophy.png" alt="trophy" layout="fill" />
                   </div>
-                  <h1>Well Done, @{user.displayName} !</h1>
+                  <h1>Well Done, @{user.username || user.name} !</h1>
                   <h2>Correct answer: {correctness}</h2>
                   <h3>Point Gained: {score}</h3>
                   {/* <h4>Rank: ...</h4> */}

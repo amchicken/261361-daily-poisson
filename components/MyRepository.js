@@ -10,7 +10,7 @@ import { FaArrowCircleLeft, FaArrowCircleRight } from "react-icons/fa";
 
 const LIMIT = 6;
 
-export default function Repository({ sort = "date" }) {
+export default function MyRepository({ sort = "date" }) {
   const router = useRouter();
   const [data, setData] = useState([]);
   const [first, setFirst] = useState();
@@ -22,40 +22,11 @@ export default function Repository({ sort = "date" }) {
   const getData = async (next = true) => {
     setLoading(true);
     const ref = firestore.collection("challenges");
+    const query = ref
+      .orderBy("createdAt", "desc")
+      .where("createdBy", "==", auth.currentUser.uid)
+      .limit(LIMIT);
 
-    let query;
-
-    if (firstDocment || lastDocment) {
-      if (next) {
-        if (sort === "date") {
-          query = ref
-            .orderBy("createdAt", "desc")
-            .startAfter(lastDocment.createdAt)
-            .limit(LIMIT);
-        } else {
-          query = ref
-            .orderBy("play", "desc")
-            .startAfter(lastDocment.play)
-            .limit(LIMIT);
-        }
-      } else {
-        if (sort === "date") {
-          query = ref
-            .orderBy("createdAt", "asc")
-            .startAfter(firstDocment.createdAt)
-            .limit(LIMIT);
-        } else {
-          query = ref
-            .orderBy("play", "asc")
-            .startAfter(firstDocment.play)
-            .limit(LIMIT);
-        }
-      }
-    } else {
-      if (sort === "date")
-        query = ref.orderBy("createdAt", "desc").limit(LIMIT);
-      else query = ref.orderBy("play", "desc").limit(LIMIT);
-    }
     const firestoreData = (await query.get()).docs.map((doc) => {
       return { ...doc.data(), id: doc.id };
     });
@@ -118,22 +89,11 @@ export default function Repository({ sort = "date" }) {
               </div>
             </div>
             <div className="container__right__content__card__float">
-              {doc.played?.includes(auth.currentUser.uid) ? (
-                <div>
-                  <AiFillStop
-                    style={{
-                      cursor: "not-allowed",
-                      backgroundColor: "#ef8c8c",
-                    }}
-                  />
-                </div>
-              ) : (
-                <div>
-                  <AiFillPlayCircle
-                    onClick={() => router.push(`challenge/${doc.id}`)}
-                  />
-                </div>
-              )}
+              <div>
+                <Link href={`/challenge/${doc.id}/admin`} passHref>
+                  Edit
+                </Link>
+              </div>
             </div>
           </div>
         </React.Fragment>
