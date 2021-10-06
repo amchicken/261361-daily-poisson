@@ -6,6 +6,7 @@ import { AiFillPlayCircle, AiFillStop } from "react-icons/ai";
 import { SiAdblock } from "react-icons/si";
 import { get } from "lodash";
 import { useRouter } from "next/router";
+import { FaArrowCircleLeft, FaArrowCircleRight } from "react-icons/fa";
 
 const LIMIT = 6;
 
@@ -144,21 +145,18 @@ export default function Repository({ sort = "date" }) {
                 <>
                     {firstDocment?.id === first?.id ? null : (
                         <button
-                            style={{ position: "absolute" }}
+                            className="back-btn"
                             onClick={() => getData(false)}
                         >
-                            back
+                            <FaArrowCircleLeft />
                         </button>
                     )}
                     {lastDocment?.id === last?.id ? null : (
                         <button
-                            style={{
-                                position: "absolute",
-                                transform: "translateX(+50px)",
-                            }}
+                            className="next-btn"
                             onClick={() => getData(true)}
                         >
-                            NEXT
+                            <FaArrowCircleRight />
                         </button>
                     )}
                 </>

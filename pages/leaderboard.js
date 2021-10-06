@@ -7,7 +7,7 @@ import Image from "next/image";
 import _ from "lodash";
 import toast from "react-hot-toast";
 
-const LIMIT = 7;
+const LIMIT = 10;
 
 export default function Leaderboard() {
     const [firestoreData, dataLoading] = useCollectionDataOnce(
@@ -17,6 +17,8 @@ export default function Leaderboard() {
             .limit(LIMIT),
         { idField: "id" }
     );
+    console.log(firestoreData);
+
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState("");
     const [serchData, setSerchData] = useState([]);
@@ -108,7 +110,10 @@ export default function Leaderboard() {
                                       <div>#{doc.index}</div>
                                       <div>
                                           <Image
-                                              src={doc.photoURL}
+                                              src={
+                                                  doc.photoURL ||
+                                                  "/notfound.png"
+                                              }
                                               width={30}
                                               height={30}
                                               alt="photoURL"
@@ -123,7 +128,10 @@ export default function Leaderboard() {
                                       <div>#{doc.index}</div>
                                       <div>
                                           <Image
-                                              src={doc.photoURL}
+                                              src={
+                                                  doc.photoURL ||
+                                                  "/notfound.png"
+                                              }
                                               width={30}
                                               height={30}
                                               alt="photoURL"
