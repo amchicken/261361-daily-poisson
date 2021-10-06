@@ -86,7 +86,6 @@ export default function Repository({ sort = "date" }) {
     getData();
 
     return () => {
-      console.log("RETURN" + sort);
       setFirst();
       setLast();
       setFirstDocment();
@@ -118,22 +117,24 @@ export default function Repository({ sort = "date" }) {
               </div>
             </div>
             <div className="container__right__content__card__float">
-              {doc.played?.includes(auth.currentUser.uid) ? (
-                <div>
-                  <AiFillStop
-                    style={{
-                      cursor: "not-allowed",
-                      backgroundColor: "#ef8c8c",
-                    }}
-                  />
-                </div>
-              ) : (
-                <div>
-                  <AiFillPlayCircle
-                    onClick={() => router.push(`Challenge/${doc.id}`)}
-                  />
-                </div>
-              )}
+              {auth ? (
+                doc.played?.includes(auth.currentUser.uid) ? (
+                  <div>
+                    <AiFillStop
+                      style={{
+                        cursor: "not-allowed",
+                        backgroundColor: "#ef8c8c",
+                      }}
+                    />
+                  </div>
+                ) : (
+                  <div>
+                    <AiFillPlayCircle
+                      onClick={() => router.push(`Challenge/${doc.id}`)}
+                    />
+                  </div>
+                )
+              ) : null}
             </div>
           </div>
         </React.Fragment>

@@ -57,7 +57,6 @@ export default function MyRepository({ sort = "date" }) {
     getData();
 
     return () => {
-      console.log("RETURN" + sort);
       setFirst();
       setLast();
       setFirstDocment();
@@ -90,7 +89,7 @@ export default function MyRepository({ sort = "date" }) {
             </div>
             <div className="container__right__content__card__float">
               <div>
-                <Link href={`/challenge/${doc.id}/admin`} passHref>
+                <Link href={`/challenge/${doc.id}/general`} passHref>
                   Edit
                 </Link>
               </div>

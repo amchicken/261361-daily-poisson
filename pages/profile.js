@@ -29,8 +29,6 @@ export default function ProfilePage() {
     { idField: "id" }
   );
 
-  console.log(history);
-
   const [left, setLeft] = useState(true);
 
   const onSubmit = async () => {
