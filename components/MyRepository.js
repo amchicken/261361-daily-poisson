@@ -6,11 +6,7 @@ import { AiFillPlayCircle, AiFillStop } from "react-icons/ai";
 import { SiAdblock } from "react-icons/si";
 import { get } from "lodash";
 import { useRouter } from "next/router";
-import {
-    FaArrowCircleLeft,
-    FaArrowCircleRight,
-    FaWrench,
-} from "react-icons/fa";
+import { FaArrowCircleLeft, FaArrowCircleRight } from "react-icons/fa";
 
 const LIMIT = 6;
 
@@ -60,50 +56,18 @@ export default function MyRepository({ sort = "date" }) {
     useEffect(() => {
         getData();
 
+        return () => {
+            setFirst();
+            setLast();
+            setFirstDocment();
+            setLastDocment();
+            setData([]);
+        };
+    }, []);
 
-    return () => {
-      setFirst();
-      setLast();
-      setFirstDocment();
-      setLastDocment();
-      setData([]);
-    };
-  }, []);
-
-  return loading ? (
-    <div>Loding. ...</div>
-  ) : (
-    <>
-      {data.map((doc) => (
-        <React.Fragment key={doc.id}>
-          <div className="container__right__content__card">
-            <div className="container__right__content__card__show">
-              <Image
-                src={doc.thumbnail || "/notfound.png"}
-                width={100}
-                height={100}
-                quality={100}
-                alt="thumbnail"
-              />
-              <div>
-                <p>{doc.name}</p>
-                <h4>{doc.question} Items</h4>
-                <span>{doc.category}</span>
-                <h4>{doc.level.toUpperCase()}</h4>
-              </div>
-            </div>
-            <div className="container__right__content__card__float">
-              <div>
-                <Link href={`/challenge/${doc.id}/general`} passHref>
-                  Edit
-                </Link>
-              </div>
-            </div>
-          </div>
-        </React.Fragment>
-      ))}
-      {!loading && (
-
+    return loading ? (
+        <div>Loding. ...</div>
+    ) : (
         <>
             {data.map((doc) => (
                 <React.Fragment key={doc.id}>
@@ -126,10 +90,10 @@ export default function MyRepository({ sort = "date" }) {
                         <div className="container__right__content__card__float">
                             <div>
                                 <Link
-                                    href={`/Challenge/${doc.id}/admin`}
+                                    href={`/challenge/${doc.id}/general`}
                                     passHref
                                 >
-                                    <FaWrench />
+                                    Edit
                                 </Link>
                             </div>
                         </div>
