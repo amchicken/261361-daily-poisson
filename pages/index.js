@@ -48,7 +48,7 @@ export default function Home() {
                         </div>
                         <div className="container__right__footer">
                             <Link href="/Challenge/create" passHref>
-                                <button>REQUEST YOUR {"Q&A"}</button>
+                                <button>CREATE YOUR CHALLENGE</button>
                             </Link>
                         </div>
                     </>
