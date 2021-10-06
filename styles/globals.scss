@@ -11,6 +11,7 @@ $font-oswald: "Oswald", sans-serif;
 
 $color--primary: #fb25ff;
 $color--secondary: #48f36e;
+$color--blue: #034391;
 
 $nav-height: 70px;
 
@@ -43,6 +44,7 @@ a {
 @import "container3";
 @import "container4";
 @import "previewCard";
+@import "play";
 
 @media all and (max-width: 1250px) {
     html {
