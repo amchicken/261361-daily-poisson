@@ -6,7 +6,11 @@ import { AiFillPlayCircle, AiFillStop } from "react-icons/ai";
 import { SiAdblock } from "react-icons/si";
 import { get } from "lodash";
 import { useRouter } from "next/router";
-import { FaArrowCircleLeft, FaArrowCircleRight } from "react-icons/fa";
+import {
+    FaArrowCircleLeft,
+    FaArrowCircleRight,
+    FaWrench,
+} from "react-icons/fa";
 
 const LIMIT = 6;
 
@@ -93,7 +97,7 @@ export default function MyRepository({ sort = "date" }) {
                                     href={`/challenge/${doc.id}/general`}
                                     passHref
                                 >
-                                    Edit
+                                    <FaWrench />
                                 </Link>
                             </div>
                         </div>
