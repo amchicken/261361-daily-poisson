@@ -7,7 +7,7 @@ import Image from "next/image";
 import _ from "lodash";
 import toast from "react-hot-toast";
 
-const LIMIT = 5;
+const LIMIT = 10;
 
 export default function Leaderboard() {
     const [firestoreData, dataLoading] = useCollectionDataOnce(
