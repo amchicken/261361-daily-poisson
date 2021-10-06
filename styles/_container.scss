@@ -97,11 +97,28 @@
                     }
                 }
             }
-            .back-btn {
-                position: absolute;
-            }
+            .back-btn,
             .next-btn {
                 position: absolute;
+                background: transparent;
+                color: white;
+                font-size: 3rem;
+                svg {
+                    background: transparent;
+                }
+                outline: none;
+                box-shadow: none;
+                border: none;
+            }
+            .back-btn {
+                transform: translate(-50%, -50%);
+                top: 49.5%;
+                left: 28%;
+            }
+            .next-btn {
+                transform: translate(-50%, -50%);
+                top: 49.5%;
+                left: 85%;
             }
         }
         &__footer {
