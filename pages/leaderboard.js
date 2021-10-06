@@ -17,7 +17,7 @@ export default function Leaderboard() {
             .limit(LIMIT),
         { idField: "id" }
     );
-    console.log(firestoreData);
+    // console.log(firestoreData);
 
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState("");
@@ -77,6 +77,11 @@ export default function Leaderboard() {
         debounceFn(e.target.value);
     }
 
+    const resetFilter = () => {
+        setSearch("");
+        setSerchData(firestoreData);
+    };
+
     if (loading) return <div>Loading...</div>;
     return (
         <div className="container">
@@ -94,7 +99,7 @@ export default function Leaderboard() {
                             onChange={handleChange}
                             placeholder="TYPE HERE"
                         />
-                        <button onClick={() => setSearch("")}>
+                        <button onClick={() => resetFilter()}>
                             RESET FILTER
                         </button>
                     </div>
