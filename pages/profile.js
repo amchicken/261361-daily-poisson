@@ -24,10 +24,8 @@ export default function ProfilePage() {
             .collection("usernames")
             .doc(auth.currentUser.uid)
             .collection("history")
-            .orderBy("createdAt", "desc"),
-
-
-  const [left, setLeft] = useState(true);
+            .orderBy("createdAt", "desc")
+    );
 
     const [left, setLeft] = useState(true);
 
